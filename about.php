@@ -1,5 +1,6 @@
 <?php
-include('header.php');
+$pageTitle = "Burger Bar: About";
+include('include/header.php');
 ?>
 
 <main>
@@ -12,5 +13,5 @@ include('header.php');
 </main>
 
 <?php
-include('footer.php');
+include('include/footer.php');
 ?>

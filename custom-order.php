@@ -1,5 +1,7 @@
 <?php
-	include('ref/header.php');
+$javascript = "js/example.js";
+$pageTitle = "Burger Bar: Order";
+include('include/header.php');
 ?>
 	
 <main>
@@ -176,5 +178,5 @@
 </main>
 
 <?php
-include('ref/footer.php');
+include('include/footer.php');
 ?>
