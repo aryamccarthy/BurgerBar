@@ -10,10 +10,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema BurgerBar
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema BurgerBar
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `BurgerBar` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `BurgerBar` ;
 
@@ -62,6 +58,10 @@ CREATE TABLE IF NOT EXISTS `BurgerBar`.`MenuItem` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- INSERT ITEMS into menu
+-- -----------------------------------------------------
+INSERT INTO `BurgerBar`.`MenuComponent 
 
 -- -----------------------------------------------------
 -- Table `BurgerBar`.`Order`
