@@ -1,6 +1,6 @@
 <?php
-	$pageTitle = "Burger Bar: Past Orders";
-	include('include/header.php');
+$pageTitle = "Burger Bar: Past Orders";
+include('include/header.php');
 ?>
 <main>
 	<section id="ticket">
@@ -39,5 +39,5 @@
 </main>
 
 <?php
-	include('include/footer.php');
+include('include/footer.php');
 ?>
