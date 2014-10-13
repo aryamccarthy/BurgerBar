@@ -17,7 +17,6 @@
 		?>
 	</head>
 	<body>
-		<p>In the header...</p>
 		<!--
 		TODO: navbar
 		-->
