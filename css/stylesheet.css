@@ -13,9 +13,24 @@ section {
   display: block;
 }
 
-header {
+body > header {
   grid-column-span: 3;
   grid-row: 1;
+}
+
+body > nav ul {
+  list-style: none;
+  padding: 0.3em;
+  margin: 0;
+}
+
+body > nav ul li {
+  float: left;
+  margin-right: 0.3125em;
+}
+
+body > nav ul a {
+  display: block;
 }
 
 #ordering {
@@ -44,6 +59,13 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-header a h1::before {
-  content: url("../img/main_icon.svg");
+body > header a h1::before {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    content: "";
+    background: url("../img/main_icon.svg") no-repeat 0 0;
+    background-size: 100%;
+  /*content: url("../img/main_icon.svg");*/
 }

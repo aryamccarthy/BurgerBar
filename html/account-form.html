@@ -4,10 +4,12 @@
 <title>Burger Bar</title>
 		<meta charset="UTF-8">		
 		<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-		<meta name="description" content="Menu Items">
-		<meta name="keywords" content="burgers,food,truck,order,menu">
+		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/include.js"></script>
 </head>
 <body>
+	<header></header>
 	<nav>
 		<h2><a href="account-form.html">Register</a></h2>
 		<h2><a href="index.html">Order</a></h2>
@@ -30,12 +32,12 @@
 				<input id=email name=email type=email placeholder="example@domain.com" required>
 			</li>
 			<li>
-				<label for=password>Password</label>
-				<input id=password name=password type=password placeholder="Password" required>
+				<label for=password>Password (8 or more characters)</label>
+				<input id=password name=password type=password pattern=".{8,}" placeholder="Password" required>
 			</li>
 			<li>
 				<label for=provider>Provider</label>
-			<select name="provider">
+			<select name="provider" id="provider">
 				<option value="visa">Visa</option>
 				<option value="MasterCard">MasterCard</option>
 				<option value="american_express" selected>American Express</option>

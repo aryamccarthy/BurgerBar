@@ -1,7 +1,6 @@
-$(document).ready(function() {
-  $("header").load("header.html");
-});
+$(document).ready(fillCommonTags);
 
-function includeHeader() {
-  $("header").load("header.html");
+function fillCommonTags() {
+  $("header").first().load("header.html");
+  $("nav").first().load("nav.html");
 };
