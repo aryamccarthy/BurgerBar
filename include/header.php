@@ -8,6 +8,7 @@
 		<meta name="description" content="Menu Items">
 		<meta name="keywords" content="burgers,food,truck,order,menu">
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/include.js"></script>
 		<?php
 			if (is_array($javascript)) {
 				foreach($javascript as $js) {

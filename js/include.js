@@ -1,9 +1,9 @@
 $(document).ready(function() {
 	//TODO: Delete fillCommonTags(). See note below. -Luke
-	fillCommonTags():
+	fillCommonTags;
 
 	var ticket = document.getElementById('active_ticket');
-}
+});
 
 //TODO: start using the php files and delete this.
 //	Luke put this stuff in header.php
@@ -23,4 +23,4 @@ function updateTicket() {
     var entry = document.createElement('li');
     entry.innerHTML=burgerToAdd;
     ticket.appendChild(entry);                                                          
- }
+}
