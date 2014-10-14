@@ -10,7 +10,6 @@ $(document).ready(function() {
 function fillCommonTags() {
   $("header").first().load("header.html");
   $("nav").first().load("nav.html");
-<<<<<<< HEAD
 };
 
 /* Protects your partially-filled custom order form.
@@ -21,8 +20,6 @@ function closeEditorWarning() {
 }
 if (document.getElementById('ordering')) {
     window.onbeforeunload = closeEditorWarning;
-=======
->>>>>>> FETCH_HEAD
 }
 
 // TODO: fix this to show the contents of payment-from.php
