@@ -13,10 +13,6 @@ main {
   clear: both;
 }
 
-/*section {
-  display: block;
-}*/
-
 body > header #title {
   display: inline;
   float: left;
@@ -34,21 +30,19 @@ body > header {
 body > nav ul {
   list-style: none;
   padding: 0.3em;
-  margin-top: auto;
-  margin-bottom: auto;
+  vertical-align: middle;
 }
 
 body > nav ul li {
   float: left;
-  margin-right: 0.3125em;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-left: 0.75em;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 body > nav ul a {
   display: block;
-  margin-top: auto;
-  margin-bottom: auto;
+  font-size: 24px;
 }
 
 #ordering {
@@ -77,6 +71,19 @@ a {
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+main nav ul {
+  list-style: none;
+}
+
+main nav li {
+  display: inline;
+  font-size: 20px;
+}
+
+main nav li a {
+  padding: 0 1em;
 }
 
 body > header a h1::before {
