@@ -35,12 +35,40 @@ function updateTicket() {
     ticket.appendChild(entry);                                                          
 }
 
+// TODO: clean up this function's output to the tickt (commas, grammar, etc)
 function updateTicketForCustomOrder() {
     var patty = document.querySelector('input[name = "patty"]:checked').value;
     var bun = document.querySelector('input[name = "bun"]:checked').value;
     var cheese = document.querySelector('input[name = "cheese"]:checked').value;
+    var toppingsList= "";
+
+    with(document.custom_order){
+      for(var i = 0; i < toppings.length; i++){
+        if(toppings[i].checked) {
+          toppingsList += toppings[i].value + ", ";
+        }
+      }
+    }
+
+    var sauceList="";
+    with(document.custom_order){
+      for(var i = 0; i < sauces.length; i++){
+        if(sauces[i].checked) {
+          sauceList += sauces[i].value + ", ";
+        }
+      }
+    }
+
+    var sideList="";
+    with(document.custom_order){
+      for(var i = 0; i < sides.length; i++){
+        if(sides[i].checked) {
+          sideList += sides[i].value + ", ";
+        }
+      }
+    }  
 
     var entry = document.createElement('li');
-    entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" ");
+    entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" cheese, topped with "+toppingsList+" "+sauceList+" with a side of "+sideList+" ");
     ticket.appendChild(entry);                                                          
 }
