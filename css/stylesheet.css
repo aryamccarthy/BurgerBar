@@ -10,7 +10,8 @@ body {
 }
 
 main {
-  clear: both;
+  width: 90%;
+  margin: 0 auto;
 }
 
 body > header #title {
@@ -35,7 +36,7 @@ body > nav ul {
 
 body > nav ul li {
   float: left;
-  margin-left: 0.75em;
+  margin-left: 1em;
   display: table-cell;
   vertical-align: middle;
 }
@@ -84,6 +85,21 @@ main nav li {
 
 main nav li a {
   padding: 0 1em;
+}
+
+section[id$="ordering"] {
+  float: right;
+  width: 75%;
+}
+
+section#ticket {
+  float: left;
+  width: 25%;
+}
+
+dialog {
+  clear: both;
+  display: block;
 }
 
 body > header a h1::before {
