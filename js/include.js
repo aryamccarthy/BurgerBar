@@ -28,9 +28,19 @@ function launchDialog() {
 }
 
 function updateTicket() {
-    var firstname = document.getElementsByClassName('burger_label');
-    var burgerToAdd=firstname[0].innerHTML;
+    var selectedBurger = document.getElementsByClassName('burger_label');
+    var burgerToAdd=selectedBurger[0].innerHTML;
     var entry = document.createElement('li');
     entry.innerHTML=burgerToAdd;
+    ticket.appendChild(entry);                                                          
+}
+
+function updateTicketForCustomOrder() {
+    var patty = document.querySelector('input[name = "patty"]:checked').value;
+    var bun = document.querySelector('input[name = "bun"]:checked').value;
+    var cheese = document.querySelector('input[name = "cheese"]:checked').value;
+
+    var entry = document.createElement('li');
+    entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" ");
     ticket.appendChild(entry);                                                          
 }
