@@ -9,8 +9,17 @@ body {
   grid-rows: auto 1em auto;
 }
 
-section {
+main {
+  clear: both;
+}
+
+/*section {
   display: block;
+}*/
+
+body > header #title {
+  display: inline;
+  float: left;
 }
 
 body > header {
@@ -18,19 +27,28 @@ body > header {
   grid-row: 1;
 }
 
+#title, #login_section, #user_section, nav {
+  height: 64px;
+}
+
 body > nav ul {
   list-style: none;
   padding: 0.3em;
-  margin: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 body > nav ul li {
   float: left;
   margin-right: 0.3125em;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 body > nav ul a {
   display: block;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #ordering {
@@ -50,6 +68,8 @@ body > nav ul a {
 #user_section {
   display: none;
 }
+
+
 
 a {
   text-decoration: none;
