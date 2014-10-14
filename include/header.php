@@ -46,8 +46,8 @@
 		</header>
 		<nav>
 			<ul>
-				<li><a href="account-form.html">Register</a></li>
-				<li><a href="index.html">Order</a></li>
-				<li><a href="about.html">About Us</a></li>
+				<li><a href="account-form.php">Register</a></li>
+				<li><a href="index.php">Order</a></li>
+				<li><a href="about.php">About Us</a></li>
 			</ul>
 		</nav>
