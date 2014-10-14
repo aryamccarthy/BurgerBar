@@ -12,6 +12,7 @@ include('include/header.php');
 			<li>Item1</li>
 			<li>Item2</li>
 		</ul>
+		<button onclick="launchDialog()">Pay now</button>
 	</section>
 
 	<section id="ordering">
@@ -27,14 +28,14 @@ include('include/header.php');
 		<div id="menuPane">
 			<!-- Menu Burgers -->
 			<section class="menu">
-				<!-- For each menu burger -->
+				<!-- For each burger on the menu -->
 				<figure>
-					<img src=" " alt=" ">
-					<figcapion class="burger_label">The Double Decker</figcaption>  
-					<figcapion class="burger_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </figcaption>  
-					<figcapion class="burger_price">$10.00</figcaption> 
-					<button class="add_button" type="submit" formmethod=" ">Add</button>
-				</figure>
+					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+					<figcaption class="burger_label">The Double Decker</figcaption>  
+					<figcaption class="burger_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </figcaption>  
+					<figcaption class="burger_price">$10.00</figcaption> 
+					<input type='button' onclick='updateTicket()' value='Submit' />
+				</figure>	
 			</section>
 
 			<!-- Past Order Burgers -->
@@ -199,8 +200,6 @@ include('include/header.php');
 					</fieldset>
 				</form>
 			</section>
-
-
 		</div>
 	</section>
 </main>
