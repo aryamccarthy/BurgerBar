@@ -1,0 +1,49 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+body {
+  padding: 1em 5%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-columns: 75% 0 25%;
+  grid-rows: auto 1em auto;
+}
+
+section {
+  display: block;
+}
+
+header {
+  grid-column-span: 3;
+  grid-row: 1;
+}
+
+#ordering {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#ticket {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+#login_section {
+  float:right;
+}
+
+#user_section {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+header a h1::before {
+  content: url("../img/main_icon.svg");
+}
