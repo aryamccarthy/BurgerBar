@@ -3,6 +3,7 @@ $(document).ready(function() {
 	fillCommonTags;
 
 	var ticket = document.getElementById('active_ticket');
+
 });
 
 //TODO: start using the php files and delete this.
@@ -26,8 +27,11 @@ if (document.getElementById('ordering')) {
 function launchDialog() { 
     
 }
+
 var ticketItemCounter = 0;
 
+
+//for menu burgers (index.html) and past orders
 function updateTicket() {
     var selectedBurger = document.getElementsByClassName('burger_label');
     var burgerToAdd=selectedBurger[0].innerHTML;
@@ -49,6 +53,8 @@ function removeTicketItem(itemId){
 // http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
 
 
+
+
 // TODO: clean up this function's output to the tickt (commas, grammar, etc)
 function updateTicketForCustomOrder() {
     var patty = document.querySelector('input[name = "patty"]:checked').value;
@@ -63,7 +69,6 @@ function updateTicketForCustomOrder() {
         }
       }
     }
-
     var sauceList="";
     with(document.custom_order){
       for(var i = 0; i < sauces.length; i++){
@@ -72,7 +77,6 @@ function updateTicketForCustomOrder() {
         }
       }
     }
-
     var sideList="";
     with(document.custom_order){
       for(var i = 0; i < sides.length; i++){
@@ -81,9 +85,15 @@ function updateTicketForCustomOrder() {
         }
       }
     }  
-
     var entry = document.createElement('li');
     entry.innerHTML=(patty + "\n" + bun + "\n" + cheese + "\n" + toppingsList + "\n" + sauceList + "\n" +sideList );
     //entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" cheese, topped with "+toppingsList+" "+sauceList+" with a side of "+sideList+" ");
+    entry.setAttribute('id','ticketItem'+ticketItemCounter);
+    var deleteButton = document.createElement('button');
+    deleteButton.appendChild(document.createTextNode("Delete"));
+    deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
+    entry.appendChild(deleteButton);
+    ticketItemCounter+=1;
+    ticket.appendChild(entry);
     ticket.appendChild(entry);                                                          
 }
