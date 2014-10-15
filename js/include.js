@@ -38,11 +38,8 @@ function updateTicket() {
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(burgerToAdd));
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
-    var deleteButton = document.createElement('button');
-    deleteButton.appendChild(document.createTextNode("Delete"));
-    deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
-    entry.appendChild(deleteButton);
-    ticketItemCounter+=1;
+    createDeleteButton(entry);   
+    createQuantityAdjuster(entry); 
     ticket.appendChild(entry);       
 }
 
@@ -58,6 +55,7 @@ function removeTicketItem(itemId){
 // TODO: clean up this function's output to the tickt (commas, grammar, etc)
 function updateTicketForCustomOrder() {
     var patty = document.querySelector('input[name = "patty"]:checked').value;
+    var pattyPrice = document.querySelector('input[name = "patty"]:checked').price;
     var bun = document.querySelector('input[name = "bun"]:checked').value;
     var cheese = document.querySelector('input[name = "cheese"]:checked').value;
     var toppingsList= "";
@@ -86,14 +84,28 @@ function updateTicketForCustomOrder() {
       }
     }  
     var entry = document.createElement('li');
-    entry.innerHTML=(patty + "\n" + bun + "\n" + cheese + "\n" + toppingsList + "\n" + sauceList + "\n" +sideList );
+    entry.innerHTML=(patty + "\n" + pattyPrice + "\n" + bun + "\n" + cheese + "\n" + toppingsList + "\n" + sauceList + "\n" +sideList );
     //entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" cheese, topped with "+toppingsList+" "+sauceList+" with a side of "+sideList+" ");
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
+    createDeleteButton(entry);  
+    createQuantityAdjuster(entry); 
+    ticket.appendChild(entry);
+}
+
+function createQuantityAdjuster(ticketElement){
+  var quantityAdjuster = document.createElement('input');
+  quantityAdjuster.setAttribute('type','number');
+  quantityAdjuster.setAttribute('name','quantity');
+  quantityAdjuster.setAttribute('min','1');
+  quantityAdjuster.setAttribute('max','10');
+  quantityAdjuster.setAttribute('value','1');
+  ticketElement.appendChild(quantityAdjuster);
+}
+
+function createDeleteButton(ticketElement){
     var deleteButton = document.createElement('button');
     deleteButton.appendChild(document.createTextNode("Delete"));
     deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
-    entry.appendChild(deleteButton);
+    ticketElement.appendChild(deleteButton);
     ticketItemCounter+=1;
-    ticket.appendChild(entry);
-    ticket.appendChild(entry);                                                          
 }
