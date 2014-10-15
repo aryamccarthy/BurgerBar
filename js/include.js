@@ -26,14 +26,28 @@ if (document.getElementById('ordering')) {
 function launchDialog() { 
     
 }
+var ticketItemCounter = 0;
 
 function updateTicket() {
     var selectedBurger = document.getElementsByClassName('burger_label');
     var burgerToAdd=selectedBurger[0].innerHTML;
     var entry = document.createElement('li');
-    entry.innerHTML=burgerToAdd;
-    ticket.appendChild(entry);                                                          
+    entry.appendChild(document.createTextNode(burgerToAdd));
+    entry.setAttribute('id','ticketItem'+ticketItemCounter);
+    var deleteButton = document.createElement('button');
+    deleteButton.appendChild(document.createTextNode("Delete"));
+    deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
+    entry.appendChild(deleteButton);
+    ticketItemCounter+=1;
+    ticket.appendChild(entry);       
 }
+
+function removeTicketItem(itemId){
+    var item = document.getElementById(itemId);
+    ticket.removeChild(item);
+}
+// http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
+
 
 // TODO: clean up this function's output to the tickt (commas, grammar, etc)
 function updateTicketForCustomOrder() {
@@ -45,7 +59,7 @@ function updateTicketForCustomOrder() {
     with(document.custom_order){
       for(var i = 0; i < toppings.length; i++){
         if(toppings[i].checked) {
-          toppingsList += toppings[i].value + ", ";
+          toppingsList += toppings[i].value + "\n ";
         }
       }
     }
@@ -54,7 +68,7 @@ function updateTicketForCustomOrder() {
     with(document.custom_order){
       for(var i = 0; i < sauces.length; i++){
         if(sauces[i].checked) {
-          sauceList += sauces[i].value + ", ";
+          sauceList += sauces[i].value + "\n ";
         }
       }
     }
@@ -63,12 +77,13 @@ function updateTicketForCustomOrder() {
     with(document.custom_order){
       for(var i = 0; i < sides.length; i++){
         if(sides[i].checked) {
-          sideList += sides[i].value + ", ";
+          sideList += sides[i].value + "\n ";
         }
       }
     }  
 
     var entry = document.createElement('li');
-    entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" cheese, topped with "+toppingsList+" "+sauceList+" with a side of "+sideList+" ");
+    entry.innerHTML=(patty + "\n" + bun + "\n" + cheese + "\n" + toppingsList + "\n" + sauceList + "\n" +sideList );
+    //entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" cheese, topped with "+toppingsList+" "+sauceList+" with a side of "+sideList+" ");
     ticket.appendChild(entry);                                                          
 }
