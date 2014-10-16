@@ -130,7 +130,7 @@ body > header a h1::before {
 
 #paymentDialog {
      visibility: hidden;
-     position: absolute;
+     position: fixed;
      left: 0px;
      top: 0px;
      width:100%;

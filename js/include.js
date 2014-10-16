@@ -38,23 +38,17 @@ $(document).ready(function() {
     localStorage.setItem("credit_card", $("#credit_card").val());
     localStorage.setItem("provider", $("#provider").val());
     window.location = 'index.html';
-    showUser();
   });
   showUser();
 });
 
 function showUser() {
-  console.log("Called showUser()");
   if (loggedIn()) {
-    console.log("User was logged in during call.");
     var first_name = getUserFirstName();
     var welcome = "Hello, " + first_name + "!";
     $("#user_hello").text(welcome);
     $("#login_section").css('display', 'none');
     $("#user_section").css('display', 'inherit');
-  }
-  else {
-    console.log("User not logged in.");
   }
 }
 
