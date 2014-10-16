@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	//TODO: Delete fillCommonTags(). See note below. -Luke
-	fillCommonTags();
+  //TODO: Delete fillCommonTags(). See note below. -Luke
+  fillCommonTags();
 
-	var ticket = document.getElementById('active_ticket');
+  var ticket = document.getElementById('active_ticket');
   $("#custom_order_link").click(function(event){
     event.preventDefault();
     $("#custom_ordering").addClass("selected");
@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 
 //TODO: start using the php files and delete this.
-//	Luke put this stuff in header.php
+//  Luke put this stuff in header.php
 function fillCommonTags() {
   $("header").first().load("header.html");
   $("nav").first().load("nav.html");
@@ -47,12 +47,12 @@ function launchDialog() {
 
 var ticketItemCounter = 0;
 
-//for menu burgers (index.html) and past orders
-function updateTicket() {
-    var selectedBurger = document.getElementsByClassName('burger_label');
-    var burgerToAdd=selectedBurger[0].innerHTML;
+//for menu burgers and past orders
+// NOTE: When pulling past orders from the database, 
+// be sure to put the burger name in the id field for the input button
+function updateTicket(selectedBurger) {
     var entry = document.createElement('li');
-    entry.appendChild(document.createTextNode(burgerToAdd));
+    entry.appendChild(document.createTextNode(selectedBurger));
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     createDeleteButton(entry);   
     createQuantityAdjuster(entry); 
