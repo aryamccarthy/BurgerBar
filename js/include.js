@@ -112,8 +112,6 @@ function guardPartialOrder() {
   window.onbeforeunload = wasOrdering() ? closeEditorWarning : null;
 }
 
-
-
 var ticketItemCounter = 0;
 
 //for menu burgers and past orders
