@@ -337,4 +337,5 @@ function clearCustomOrderForm() {
   setIDsToChecked(radioIDs);
   var checkBoxIDs = ["#cheddar", "#swiss", "#american", "#tomatoes", "#lettuce", "#onions", "#pickles", "#red_onion", "#bacon", "#mushrooms", "#jalapenos", "#ketchup", "#mustard", "#mayonnaise", "#bbq", "#french_fries", "#tater_tots", "#onion_rings"];
   setIDsToUnchecked(checkBoxIDs);
+  $("#burger_quantity").val(1);
 }
