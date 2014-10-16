@@ -203,22 +203,23 @@ function updateTicketForCustomOrder() {
 
     totalPrice += +sidesPrice;
     var entry = document.createElement('li');
-    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br> Topped with: " + toppingsList+ "<br>Sauces: " + sauceList + "<br> Sides: " + sideList + "Price:" + totalPrice);
+    var quantity = document.getElementById("burger_quantity").value;
+    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br>Topped with: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList + "Price:" + totalPrice);
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     createDeleteButton(entry);  
-    createQuantityAdjuster(entry); 
+    createQuantityAdjuster(entry,quantity); 
     ticket.appendChild(entry);
     guardPartialOrder();
     clearCustomOrderForm();
 }
 
-function createQuantityAdjuster(ticketElement){
+function createQuantityAdjuster(ticketElement, userSetQuantity){
   var quantityAdjuster = document.createElement('input');
   quantityAdjuster.setAttribute('type','number');
   quantityAdjuster.setAttribute('name','quantity');
   quantityAdjuster.setAttribute('min','1');
   quantityAdjuster.setAttribute('max','10');
-  quantityAdjuster.setAttribute('value','1');
+  quantityAdjuster.setAttribute('value', userSetQuantity);
   ticketElement.appendChild(quantityAdjuster);
 }
 
