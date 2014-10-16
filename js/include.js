@@ -124,10 +124,8 @@ function guardPartialOrder() {
 }
 
 var ticketItemCounter = 0;
+var ticketTotal=0.00; 
 
-//for menu burgers and past orders
-// NOTE: When pulling past orders from the database, 
-// be sure to put the burger name in the id field for the input button
 function updateTicket(selectedBurger) {
     var entry = document.createElement('li');
     entry.appendChild(document.createTextNode(selectedBurger));
@@ -137,17 +135,24 @@ function updateTicket(selectedBurger) {
     ticket.appendChild(entry);
     guardPartialOrder();       
 }
-
-function removeTicketItem(itemId){
+//Tips from: http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
+function removeTicketItem(itemId, priceId, quantityId){
     var item = document.getElementById(itemId);
+    var priceItem=document.getElementById(priceId);
+    var quantityItem=document.getElementById(quantityId);
+    var priceBuffer=priceItem.innerHTML;
     ticket.removeChild(item);
+    ticket.removeChild(priceItem);
+
+    updateTicketTotal(quantityItem.value, (+priceBuffer * -1));
     guardPartialOrder();
 }
-// http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
+function updateTicketTotal(userSetQuantity, burgerCost){
+  var priceElement = document.getElementById('total_price');
+  ticketTotal+= (+userSetQuantity * +burgerCost);
+  priceElement.innerHTML=ticketTotal;
 
-
-var ticketTotal=0.00; 
-
+}
 function updateTicketForCustomOrder() {
     var totalPrice=0; 
    
@@ -159,9 +164,9 @@ function updateTicketForCustomOrder() {
     var bunPrice = document.getElementById(bunId+"price").innerHTML;
     var bunText = document.querySelector('input[name = "bun"]:checked').value;
 
-var cheeseId="";
-var cheesePrice="";
-var cheeseText="";
+    var cheeseId="";
+    var cheesePrice="";
+    var cheeseText="";
     with(document.custom_order){
       for (var i=0; i<cheese.length; i++){
         if(cheese[i].checked){
@@ -175,9 +180,9 @@ var cheeseText="";
     totalPrice += +pattyPrice;
     totalPrice += +bunPrice;
     totalPrice += +cheesePrice;
+    
     var toppingsList= "";
     var sauceList="";
-
     var toppingsPrice=0;
     var sidesPrice=0;
 
@@ -212,23 +217,28 @@ var cheeseText="";
 
     totalPrice += +sidesPrice;
     var entry = document.createElement('li');
+    var priceEntry = document.createElement('li');
+    
+    priceEntry.innerHTML=totalPrice;
+    priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
+
     var quantity = document.getElementById("burger_quantity").value;
-    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br>Topped with: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList + "Price:" + totalPrice);
+    
+    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br>Topped with: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList); 
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
+    
     createDeleteButton(entry);  
     createQuantityAdjuster(entry,quantity);
     updateTicketTotal(quantity, totalPrice); 
+    
+    ticket.appendChild(priceEntry);
     ticket.appendChild(entry);
+    
     guardPartialOrder();
     clearCustomOrderForm();
 }
 
-function updateTicketTotal(userSetQuantity, burgerCost){
-  var priceElement = document.getElementById('total_price');
-  ticketTotal= (+userSetQuantity * +burgerCost);
-  priceElement.innerHTML=ticketTotal;
 
-}
 function createQuantityAdjuster(ticketElement, userSetQuantity){
   var quantityAdjuster = document.createElement('input');
   quantityAdjuster.setAttribute('type','number');
@@ -236,13 +246,14 @@ function createQuantityAdjuster(ticketElement, userSetQuantity){
   quantityAdjuster.setAttribute('min','1');
   quantityAdjuster.setAttribute('max','10');
   quantityAdjuster.setAttribute('value', userSetQuantity);
+  quantityAdjuster.setAttribute('id', 'adjuster'+ticketItemCounter);
   ticketElement.appendChild(quantityAdjuster);
 }
 
 function createDeleteButton(ticketElement){
     var deleteButton = document.createElement('button');
     deleteButton.appendChild(document.createTextNode("Delete"));
-    deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
+    deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'","'+'priceItem'+ticketItemCounter+'","'+'adjuster'+ticketItemCounter+'")');
     ticketElement.appendChild(deleteButton);
     ticketItemCounter+=1;
 }
