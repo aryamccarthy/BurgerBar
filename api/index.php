@@ -26,11 +26,11 @@ $app->get('/hello/:last/:first/:MI', function($last, $first, $MI) {
 */
 $app->post('/login', function() {
 	global $pdo;
-	$args[":username"] = $_POST['username'];
+	$args[":email"] = $_POST['email'];
 	$args[":password"] = $_POST['password'];
 	$statement = $pdo->prepare(
 		"SELECT * FROM User
-		WHERE username = :username AND password = :password;");
+		WHERE email = :email AND password = :password;");
 	if ($statement->execute($args)) {
 		if ($row = $statement->fetch()) {
 			$result["success"]=true;
@@ -39,7 +39,7 @@ $app->post('/login', function() {
 		}
 	} else {
 		$result["success"]=false;
-		$result["error"]=$statement->errorInfo()[2];
+		$result["error"]=$statement->errorInfo();
 	}
 	echo json_encode($result);
 });
