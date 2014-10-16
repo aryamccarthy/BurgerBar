@@ -204,6 +204,7 @@
 							</fieldset>
 							<fieldset>
 								<input type='button' onclick='updateTicketForCustomOrder();' value='Add to ticket' />
+								<input type='button' onclick="clearCustomOrderForm();" value="Reset this burger" />
 							</fieldset>
 						</fieldset>
 					</form>
@@ -286,7 +287,7 @@
 						</li>
 						<li>
 							<label for=email>Email</label>
-							<input id=email name=email type=email placeholder="example@domain.com" required>
+							<input id=email name=email type=email placeholder="example@domain.com">
 						</li>	
 						<li>
 							<label for=provider>Provider</label>
@@ -303,10 +304,7 @@
 				<!--Regex c/o http://www.regular-expressions.info/creditcard.html-->
 						</li>
 					</ol>
-				</fieldset>
-				
-				<fieldset>
-    				<input type="submit" value="Place order">
+    				<input type="submit" id="confirmPayment" value="Place order">
     				<button type="button" onclick="overlay()">Cancel</button>
 				</fieldset>
 			</form>
