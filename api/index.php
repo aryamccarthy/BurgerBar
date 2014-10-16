@@ -21,6 +21,8 @@ $app->get('/hello/:last/:first/:MI', function($last, $first, $MI) {
 
 /**
 *	Login
+*
+*	Owner: Luke
 */
 $app->post('/login', function() {
 	global $pdo;
@@ -44,6 +46,8 @@ $app->post('/login', function() {
 
 /**
 *	Create Account
+*
+* 	Owner: Luke
 */
 $app->post('/createAccount', function() {
 	global $pdo;
@@ -69,13 +73,17 @@ $app->post('/createAccount', function() {
 
 /**
 *	Place Order
+*
+*	Owner: Zach
 */
 $app->post('/placeOrder', function() {
 
 });
 
 /**
-*	Past Ordesr
+*	Past Orders
+*
+*	Owner: Danny
 */
 $app->post('/pastOrders', function() {
 
@@ -83,6 +91,8 @@ $app->post('/pastOrders', function() {
 
 /**
 *	Is New Email
+*
+*	
 */
 $app->post('/isNewEmail', function() {
 
@@ -90,15 +100,19 @@ $app->post('/isNewEmail', function() {
 
 /**
 *	Get All Burger Components
+*
+*
 */
-$app->post('/getAllBurgerComponents', function() {
+$app->get('/getAllBurgerComponents', function() {
 
 });
 
 /**
 *	Get All Burger Component By Type
+*
+*	
 */
-$app->post('/getAllBurgerComponentsByType', function() {
+$app->get('/getAllBurgerComponentsByType', function() {
 
 });
 
