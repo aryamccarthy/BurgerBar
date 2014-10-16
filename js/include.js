@@ -49,7 +49,8 @@ $(document).ready(function() {
 });
 
 function limitSelectionToOne(event) {
-  if ($('input[type=checkbox]:checked').length > 1) {
+  var name = event.target.name;
+  if ($('[name="' + name + '"]:checked').length > 1) {
     $(this).prop('checked', false);
     alert("You can only choose 1.");
   }
