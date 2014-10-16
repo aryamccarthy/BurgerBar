@@ -146,7 +146,7 @@ function removeTicketItem(itemId){
 // http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
 
 
-
+var ticketTotal=0.00; 
 
 function updateTicketForCustomOrder() {
     var totalPrice=0; 
@@ -159,9 +159,18 @@ function updateTicketForCustomOrder() {
     var bunPrice = document.getElementById(bunId+"price").innerHTML;
     var bunText = document.querySelector('input[name = "bun"]:checked').value;
 
-    var cheeseId = document.querySelector('input[name = "cheese"]:checked').id;
-    var cheesePrice = document.getElementById(cheeseId+"price").innerHTML;
-    var cheeseText = document.querySelector('input[name = "cheese"]:checked').value
+var cheeseId="";
+var cheesePrice="";
+var cheeseText="";
+    with(document.custom_order){
+      for (var i=0; i<cheese.length; i++){
+        if(cheese[i].checked){
+         cheeseId = cheese[i].id;
+         cheesePrice = document.getElementById(cheeseId+"price").innerHTML;
+         cheeseText = document.querySelector('input[name = "cheese"]:checked').value
+        }
+      }
+    }
 
     totalPrice += +pattyPrice;
     totalPrice += +bunPrice;
@@ -207,12 +216,19 @@ function updateTicketForCustomOrder() {
     entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br>Topped with: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList + "Price:" + totalPrice);
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     createDeleteButton(entry);  
-    createQuantityAdjuster(entry,quantity); 
+    createQuantityAdjuster(entry,quantity);
+    updateTicketTotal(quantity, totalPrice); 
     ticket.appendChild(entry);
     guardPartialOrder();
     clearCustomOrderForm();
 }
 
+function updateTicketTotal(userSetQuantity, burgerCost){
+  var priceElement = document.getElementById('total_price');
+  ticketTotal= (+userSetQuantity * +burgerCost);
+  priceElement.innerHTML=ticketTotal;
+
+}
 function createQuantityAdjuster(ticketElement, userSetQuantity){
   var quantityAdjuster = document.createElement('input');
   quantityAdjuster.setAttribute('type','number');
