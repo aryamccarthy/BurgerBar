@@ -148,26 +148,45 @@ function removeTicketItem(itemId){
 
 
 
-// TODO: clean up this function's output to the tickt (commas, grammar, etc)
 function updateTicketForCustomOrder() {
-    var patty = document.querySelector('input[name = "patty"]:checked').value;
-    var pattyPrice = document.querySelector('input[name = "patty"]:checked').price;
-    var bun = document.querySelector('input[name = "bun"]:checked').value;
-    var cheese = document.querySelector('input[name = "cheese"]:checked').value;
+    var totalPrice=0; 
+   
+    var pattyId = document.querySelector('input[name = "patty"]:checked').id;
+    var pattyPrice=document.getElementById(pattyId+"price").innerHTML;
+    var pattyText=document.querySelector('input[name = "patty"]:checked').value;
+    
+    var bunId = document.querySelector('input[name = "bun"]:checked').id;
+    var bunPrice = document.getElementById(bunId+"price").innerHTML;
+    var bunText = document.querySelector('input[name = "bun"]:checked').value;
+
+    var cheeseId = document.querySelector('input[name = "cheese"]:checked').id;
+    var cheesePrice = document.getElementById(cheeseId+"price").innerHTML;
+    var cheeseText = document.querySelector('input[name = "cheese"]:checked').value
+
+    totalPrice += +pattyPrice;
+    totalPrice += +bunPrice;
+    totalPrice += +cheesePrice;
     var toppingsList= "";
+    var sauceList="";
+
+    var toppingsPrice=0;
+    var sidesPrice=0;
 
     with(document.custom_order){
       for(var i = 0; i < toppings.length; i++){
         if(toppings[i].checked) {
-          toppingsList += toppings[i].value + "\n ";
+          toppingsList += toppings[i].value + "<br> ";
+          var toppingsId=toppings[i].id;
+          toppingsPrice+= +document.getElementById(toppingsId+"price").innerHTML;
         }
       }
     }
-    var sauceList="";
+    totalPrice += +toppingsPrice;
+
     with(document.custom_order){
       for(var i = 0; i < sauces.length; i++){
         if(sauces[i].checked) {
-          sauceList += sauces[i].value + "\n ";
+          sauceList += sauces[i].value + "<br>";
         }
       }
     }
@@ -175,13 +194,16 @@ function updateTicketForCustomOrder() {
     with(document.custom_order){
       for(var i = 0; i < sides.length; i++){
         if(sides[i].checked) {
-          sideList += sides[i].value + "\n ";
+          sideList += sides[i].value + "<br>";
+          var sidesId=sides[i].id;
+          sidesPrice+= +document.getElementById(sidesId+"price").innerHTML;
         }
       }
     }  
 
+    totalPrice += +sidesPrice;
     var entry = document.createElement('li');
-    entry.innerHTML=(patty + " patty on a " + bun + " bun with " + cheese + "<br> Topped with: " + toppingsList + "<br>Sauces: " + sauceList + "<br> Sides: " +sideList );
+    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br> Topped with: " + toppingsList+ "<br>Sauces: " + sauceList + "<br> Sides: " + sideList + "Price:" + totalPrice);
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     createDeleteButton(entry);  
     createQuantityAdjuster(entry); 
