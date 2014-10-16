@@ -1,7 +1,7 @@
 $(document).ready(function() {
   //TODO: Delete fillCommonTags(). See note below. -Luke
   fillCommonTags();
-
+  showUser();
   var ticket = document.getElementById('active_ticket');
   $("#custom_order_link").click(function(event){
     event.preventDefault();
@@ -22,28 +22,78 @@ $(document).ready(function() {
     $("#past_ordering").addClass("selected");
   });
 
+  /* A cheap hack, this doesn't preserve across pages.*/
   $(document).on('submit', '#login_form', function (event) {
-    console.log("handler for submit called");
     event.preventDefault();
     var first_name = $("#login_email").val(); // CHANGE THIS.
     $("#user_hello").text(first_name);
     $("#login_section").hide();
     $("#user_section").show();
   });
-  /*$("#login_form").submit(function(event) {
-    alert( "Handler for .submit() called." );
+
+  $(document).on('submit', '#login', function (event) {
     event.preventDefault();
-    console.log("HELLO!");
-    var first_name = $("#login_email").val();
-    $("#user_hello").text(first_name);
-    $("#login_section").style.display = "none";
-    $("#user_section").style.visibility = "visible";
-  });*/
+    localStorage.setItem("first_name", $("#first_name").val());
+    localStorage.setItem("last_name", $("#last_name").val());
+    localStorage.setItem("email", $("#email").val());
+    localStorage.setItem("password", $("#password").val());
+    localStorage.setItem("credit_card", $("#credit_card").val());
+    localStorage.setItem("provider", $("#provider").val());
+    window.location = 'index.html';
+    showUser();
+  });
 });
+
+function showUser() {
+  if (loggedIn()) {
+    var first_name = getUserFirstName();
+    var welcome = "Hello, " + first_name + "!";
+    $("#user_hello").text(first_name);
+    $("#login_section").hide();
+    $("#user_section").show();
+  }
+}
+
+function getUserFirstName() {
+  return localStorage.getItem("first_name");
+}
+
+function getUserLastName() {
+  return localStorage.getItem("last_name");
+}
+
+function getUserEmail() {
+  return localStorage.getItem("email");
+}
+
+
+function getUserProvider() {
+  return localStorage.getItem("provider");
+}
+
+
+function getUserCreditCard() {
+  return localStorage.getItem("credit_card");
+}
 
 function overlay() {
   var el = document.getElementById("paymentDialog");
   el.style.visibility = (el.style.visibility === "visible") ? "hidden" : "visible";
+  prepopulate();
+}
+
+function prepopulate() {
+  if (loggedIn()) {
+    $("#first_name").val(getUserFirstName());
+    $("#last_name").val(getUserLastName());
+    $("#email").val(getUserEmail());
+    $("#provider").val(getUserProvider());
+    $("#credit_card").val(getUserCreditCard());
+  }
+}
+
+function loggedIn() {
+  return localStorage.getItem("first_name") !== null;
 }
 
 //TODO: start using the php files and delete this.
