@@ -69,4 +69,24 @@ $app->post('/createAccount', function() {
 
 $app->run();
 
+$app->post('/placeOrder', function() {
+
+});
+
+$app->post('/pastOrders', function() {
+
+});
+
+$app->post('/isNewEmail', function() {
+
+});
+
+$app->post('/getAllBurgerComponents', function() {
+
+});
+
+$app->post('/getAllBurgerComponentsByType', function() {
+
+});
+
 ?>
