@@ -1,0 +1,30 @@
+{
+    "email" : "rlaugia@smu.edu",
+    "order" : 
+    {
+        "timeStamp" : "2014-02-21 18:32:15",
+        "burgers" : 
+        [
+            "itemID" : 1,
+            "burgerInfo" : 
+            [ 
+                "bun" : {"name" : "White", "price" : 0.50},
+                "cheese" : {"name" : "Cheddar", "price" : 0.35},
+                "meat" : {"name" : "1/3 lb. Beef", "price" : 2},
+                "side" : {"name" : "French Fries", "price" : 1},
+                "sauces" : 
+                [
+                    {"name" : "Ketchup", "price" : 0},
+                    {"name" : "Mustard", "price" : 0}
+                ]
+                "toppings" :
+                [
+                    {"name" : "Lettuce", "price" : 0},
+                    {"name" : "Tomatoes", "price" : 0},
+                    {"name" : "Onions", "price" : 0},
+                    {"name" : "Pickles", "price" : 0}
+                ]
+            ]
+        ]        
+    }
+}
