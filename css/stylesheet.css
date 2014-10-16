@@ -25,7 +25,8 @@ body {
 main {
   width: 90%;
   margin: 0 auto;
-  margin-top: 1px solid black;
+  border-top: 1px solid black;
+  padding-top: 1em;
 }
 
 body > header #title {
