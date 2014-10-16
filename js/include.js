@@ -45,6 +45,7 @@ $(document).ready(function() {
   });
   
   $('[name="sides"]').on('change', limitSelectionToOne);
+  $('[name="cheese"]').on('change', limitSelectionToOne);
 });
 
 function limitSelectionToOne(event) {
@@ -222,8 +223,8 @@ function setIDsToUnchecked(ids) {
 
 
 function clearCustomOrderForm() {
-  var radioIDs = ["#third_beef", "#white", "#cheddar"];
+  var radioIDs = ["#third_beef", "#white"];
   setIDsToChecked(radioIDs);
-  var checkBoxIDs = ["#tomatoes", "#lettuce", "#onions", "#pickles", "#red_onion", "#bacon", "#mushrooms", "#jalapenos", "#ketchup", "#mustard", "#mayonnaise", "#bbq", "#french_fries", "#tater_tots", "#onion_rings"];
+  var checkBoxIDs = ["#cheddar", "#swiss", "#american", "#tomatoes", "#lettuce", "#onions", "#pickles", "#red_onion", "#bacon", "#mushrooms", "#jalapenos", "#ketchup", "#mustard", "#mayonnaise", "#bbq", "#french_fries", "#tater_tots", "#onion_rings"];
   setIDsToUnchecked(checkBoxIDs);
 }
