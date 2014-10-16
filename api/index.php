@@ -20,12 +20,33 @@ $app->get('/hello/:last/:first/:MI', function($last, $first, $MI) {
 });
 
 /**
+*   TEST login
+*
+*   Owner: Luke
+*/
+$app->get('/in', function() {
+    session_start();
+    $_SESSION['test']=TRUE;
+});
+/**
+*   TEST logout
+*
+*   Owner: Luke
+*/
+$app->get('/out', function() {
+    session_start();
+    $_SESSION['test']=FALSE;
+    session_destroy();
+});
+
+/**
 *   Login
 *
 *   Owner: Luke
 */
 $app->post('/login', function() {
     global $pdo;
+    session_start();
     $args[":email"] = $_POST['email'];
     $args[":password"] = $_POST['password'];
     $statement = $pdo->prepare(
@@ -35,6 +56,8 @@ $app->post('/login', function() {
         if ($row = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)) {
             $result["userInfo"]=$row;
             $result["success"]=true;
+            $_SESSION['userInfo'] = $row;
+            $_SESSION['isLoggedIn'] = TRUE;
         } else {
             $result["success"]=false;
         }
@@ -43,6 +66,17 @@ $app->post('/login', function() {
         $result["error"]=$statement->errorInfo();
     }
     echo json_encode($result);
+});
+
+/**
+*   Logout
+*
+*   Owner: Luke
+*/
+$app->post('/logout', function() {
+    session_start();
+    $_SESSION['isLoggedIn']=FALSE;
+    session_destroy();
 });
 
 /**

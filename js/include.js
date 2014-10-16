@@ -25,7 +25,7 @@ $(document).ready(function() {
     event.preventDefault();
     var first_name = $("#login_email").val(); // CHANGE THIS.
     $("#user_hello").text(first_name);
-    $("#login_section").hide();
+    // $("#login_section").hide();
     $("#user_section").show();
   });
 
@@ -50,7 +50,7 @@ function showUser() {
     var first_name = getUserFirstName();
     var welcome = "Hello, " + first_name + "!";
     $("#user_hello").text(welcome);
-    $("#login_section").css('display', 'none');
+    // $("#login_section").css('display', 'none');
     $("#user_section").css('display', 'inherit');
   }
 }
