@@ -67,26 +67,41 @@ $app->post('/createAccount', function() {
 	echo json_encode($result);
 });
 
-$app->run();
-
+/**
+*	Place Order
+*/
 $app->post('/placeOrder', function() {
 
 });
 
+/**
+*	Past Ordesr
+*/
 $app->post('/pastOrders', function() {
 
 });
 
+/**
+*	Is New Email
+*/
 $app->post('/isNewEmail', function() {
 
 });
 
+/**
+*	Get All Burger Components
+*/
 $app->post('/getAllBurgerComponents', function() {
 
 });
 
+/**
+*	Get All Burger Component By Type
+*/
 $app->post('/getAllBurgerComponentsByType', function() {
 
 });
+
+$app->run();
 
 ?>
