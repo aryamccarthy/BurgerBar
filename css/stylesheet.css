@@ -8,6 +8,10 @@ article[id$="ordering"].selected {
   display: inherit;
 }
 
+label + label::before, .burger_price::before {
+  content: "$"
+}
+
 body {
   padding: 1em 5%;
   max-width: 1000px;
@@ -21,6 +25,8 @@ body {
 main {
   width: 90%;
   margin: 0 auto;
+  border-top: 1px solid black;
+  padding-top: 1em;
 }
 
 body > header #title {
