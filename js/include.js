@@ -141,18 +141,23 @@ function removeTicketItem(itemId, priceId, quantityId){
     var priceItem=document.getElementById(priceId);
     var quantityItem=document.getElementById(quantityId);
     var priceBuffer=priceItem.innerHTML;
+    
+    updateTicketTotal(+quantityItem.value, (+priceBuffer * -1));
+
     ticket.removeChild(item);
     ticket.removeChild(priceItem);
+    ticket.removeChild(quantityItem);
 
-    updateTicketTotal(quantityItem.value, (+priceBuffer * -1));
     guardPartialOrder();
 }
+
 function updateTicketTotal(userSetQuantity, burgerCost){
   var priceElement = document.getElementById('total_price');
-  ticketTotal+= (+userSetQuantity * +burgerCost);
+  ticketTotal+= (userSetQuantity * burgerCost);
   priceElement.innerHTML=ticketTotal;
-
 }
+
+
 function updateTicketForCustomOrder() {
     var totalPrice=0; 
    
@@ -167,6 +172,7 @@ function updateTicketForCustomOrder() {
     var cheeseId="";
     var cheesePrice="";
     var cheeseText="";
+
     with(document.custom_order){
       for (var i=0; i<cheese.length; i++){
         if(cheese[i].checked){
@@ -230,6 +236,8 @@ function updateTicketForCustomOrder() {
     createDeleteButton(entry);  
     createQuantityAdjuster(entry,quantity);
     updateTicketTotal(quantity, totalPrice); 
+    ticketItemCounter+=1;
+
     
     ticket.appendChild(priceEntry);
     ticket.appendChild(entry);
@@ -255,7 +263,6 @@ function createDeleteButton(ticketElement){
     deleteButton.appendChild(document.createTextNode("Delete"));
     deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'","'+'priceItem'+ticketItemCounter+'","'+'adjuster'+ticketItemCounter+'")');
     ticketElement.appendChild(deleteButton);
-    ticketItemCounter+=1;
 }
 
 function setIDsToChecked(ids) {
