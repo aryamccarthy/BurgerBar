@@ -32,7 +32,8 @@ $app->post('/login', function() {
         "SELECT * FROM User
         WHERE email = :email AND password = :password;");
     if ($statement->execute($args)) {
-        if ($row = $statement->fetch()) {
+        if ($row = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)) {
+            $result["userInfo"]=$row;
             $result["success"]=true;
         } else {
             $result["success"]=false;
