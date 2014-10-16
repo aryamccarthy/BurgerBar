@@ -20,26 +20,6 @@ $app->get('/hello/:last/:first/:MI', function($last, $first, $MI) {
 });
 
 /**
-*   TEST login
-*
-*   Owner: Luke
-*/
-$app->get('/in', function() {
-    session_start();
-    $_SESSION['test']=TRUE;
-});
-/**
-*   TEST logout
-*
-*   Owner: Luke
-*/
-$app->get('/out', function() {
-    session_start();
-    $_SESSION['test']=FALSE;
-    session_destroy();
-});
-
-/**
 *   Login
 *
 *   Owner: Luke

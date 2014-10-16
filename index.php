@@ -4,16 +4,6 @@ $pageTitle = "Burger Bar: Order";
 include('include/header.php');
 ?>
 <main>
-    <div>
-        <?php
-            session_start();
-            if ($_SESSION['isLoggedIn']==TRUE) {
-                echo "Logged in!";
-            } else {
-                echo "Not logged in...";
-            }
-        ?>
-    </div>
     <section id="ticket">
             <section>
                 <h1>Ticket</h1>
