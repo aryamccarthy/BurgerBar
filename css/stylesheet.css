@@ -1,5 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+article[id$="ordering"] {
+  display: none;
+}
+
+article[id$="ordering"].selected {
+  display: inherit;
+}
+
 body {
   padding: 1em 5%;
   max-width: 1000px;
@@ -24,13 +32,13 @@ body > header {
   grid-row: 1;
 }
 
-#title, #login_section, #user_section, nav {
+#title, #login_section, #user_section, body > nav, body > nav > ul, body > nav > ul > li {
   height: 64px;
 }
 
 body > nav ul {
   list-style: none;
-  padding: 0.3em;
+  /*padding: 0.3em;*/
   vertical-align: middle;
 }
 
@@ -87,7 +95,7 @@ main nav li a {
   padding: 0 1em;
 }
 
-section[id$="ordering"] {
+section#ordering {
   float: right;
   width: 75%;
 }

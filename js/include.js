@@ -1,10 +1,28 @@
 $(document).ready(function() {
 	//TODO: Delete fillCommonTags(). See note below. -Luke
-	fillCommonTags;
+	fillCommonTags();
 
 	var ticket = document.getElementById('active_ticket');
-
+  $("#custom_order_link").click(function(event){
+    event.preventDefault();
+    $("#custom_ordering").addClass("selected");
+    $("#menu_ordering").removeClass("selected");
+    $("#past_ordering").removeClass("selected");
+  });
+  $("#menu_order_link").click(function(event){
+    event.preventDefault();
+    $("#custom_ordering").removeClass("selected");
+    $("#menu_ordering").addClass("selected");
+    $("#past_ordering").removeClass("selected");
+  });
+  $("#past_order_link").click(function(event){
+    event.preventDefault();
+    $("#custom_ordering").removeClass("selected");
+    $("#menu_ordering").removeClass("selected");
+    $("#past_ordering").addClass("selected");
+  });
 });
+
 
 //TODO: start using the php files and delete this.
 //	Luke put this stuff in header.php
@@ -108,4 +126,9 @@ function createDeleteButton(ticketElement){
     deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
     ticketElement.appendChild(deleteButton);
     ticketItemCounter+=1;
+}
+
+
+function setSelected(event) {
+
 }
