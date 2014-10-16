@@ -1,4 +1,3 @@
-<!-- Homepage: opens to menu burger ordering page -->
 <!doctype html>
 <html>
 	<head>
@@ -12,6 +11,16 @@
 
 	</head>
 	<body>	
+	<form id="login_form">
+		<fieldset>
+			<legend>Login</legend>
+				<!--Pattern for noncompliant browsers from http://stackoverflow.com/questions/5601647/html5-email-input-pattern-attribute -->
+				<input type="email" name="login_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required/>
+				<input type="password" name="login_password" pattern=".{8,24}" placeholder="Password" required/>
+		</fieldset>
+		<input type="submit" style="visibility: hidden; position: absolute;" />
+	</form>
+
 
 		<header></header>
 		<nav>
@@ -188,9 +197,6 @@
 							</fieldset>
 						</fieldset>
 					</form>
-
-					<button onclick="launchDialog()">Pay now</button>
-
 				</article>
 			<article id="menu_ordering"
 			<!-- For each burger on the menu -->
@@ -216,7 +222,6 @@
 
 		<button onclick="launchDialog()">Pay now</button>
 
-		<!-- TODO: move to payment-form.php -->
 		<dialog id="paymentDialog">
 			<form id=payment action="order-confirmation.html">
 				<fieldset>
