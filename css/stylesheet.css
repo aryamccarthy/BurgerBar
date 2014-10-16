@@ -64,7 +64,7 @@ body > nav ul a {
   grid-row: 3;
 }
 
-#login_section {
+#login_section, #user_section {
   float:right;
 }
 
@@ -76,6 +76,13 @@ body > nav ul a {
 
 a {
   text-decoration: none;
+  color: #007;
+}
+
+a:hover {
+  background: #BEE;
+  border-radius: 0.25em;
+
 }
 
 body {
@@ -139,6 +146,7 @@ body > header a h1::before {
      margin: 100px auto;
      background-color: #fff;
      border:1px solid #000;
+     border-radius: 0.5em;
      padding:15px;
      text-align:center;
 }

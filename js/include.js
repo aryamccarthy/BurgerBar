@@ -21,11 +21,29 @@ $(document).ready(function() {
     $("#menu_ordering").removeClass("selected");
     $("#past_ordering").addClass("selected");
   });
+
+  $(document).on('submit', '#login_form', function (event) {
+    console.log("handler for submit called");
+    event.preventDefault();
+    var first_name = $("#login_email").val(); // CHANGE THIS.
+    $("#user_hello").text(first_name);
+    $("#login_section").hide();
+    $("#user_section").show();
+  });
+  /*$("#login_form").submit(function(event) {
+    alert( "Handler for .submit() called." );
+    event.preventDefault();
+    console.log("HELLO!");
+    var first_name = $("#login_email").val();
+    $("#user_hello").text(first_name);
+    $("#login_section").style.display = "none";
+    $("#user_section").style.visibility = "visible";
+  });*/
 });
 
 function overlay() {
-  el = document.getElementById("paymentDialog");
-  el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+  var el = document.getElementById("paymentDialog");
+  el.style.visibility = (el.style.visibility === "visible") ? "hidden" : "visible";
 }
 
 //TODO: start using the php files and delete this.
@@ -128,9 +146,4 @@ function createDeleteButton(ticketElement){
     deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
     ticketElement.appendChild(deleteButton);
     ticketItemCounter+=1;
-}
-
-
-function setSelected(event) {
-
 }
