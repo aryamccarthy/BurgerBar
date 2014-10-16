@@ -23,6 +23,10 @@ $(document).ready(function() {
   });
 });
 
+function overlay() {
+  el = document.getElementById("paymentDialog");
+  el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+}
 
 //TODO: start using the php files and delete this.
 //  Luke put this stuff in header.php

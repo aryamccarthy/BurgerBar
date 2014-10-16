@@ -247,7 +247,7 @@
 			</article>
 		</section>
 
-		<button onclick="launchDialog()">Pay now</button>
+		<button onclick="overlay()">Pay now</button>
 
 		<dialog id="paymentDialog">
 			<form id=payment action="order-confirmation.html">
@@ -285,6 +285,7 @@
 				
 				<fieldset>
     				<input type="submit" value="Place order">
+    				<button type="button" onclick="overlay()">Cancel</button>
 				</fieldset>
 			</form>
 		</dialog>
