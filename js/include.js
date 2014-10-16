@@ -37,7 +37,7 @@ $(document).ready(function() {
     localStorage.setItem("password", $("#password").val());
     localStorage.setItem("credit_card", $("#credit_card").val());
     localStorage.setItem("provider", $("#provider").val());
-    window.location = 'index.html';
+    window.location = 'index.php'; //Luke changed this to .php
   });
   showUser();
 });
