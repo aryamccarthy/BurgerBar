@@ -8,7 +8,7 @@ article[id$="ordering"].selected {
   display: inherit;
 }
 
-label + label::before {
+label + label::before, .burger_price::before {
   content: "$"
 }
 
