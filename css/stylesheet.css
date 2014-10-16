@@ -8,6 +8,10 @@ article[id$="ordering"].selected {
   display: inherit;
 }
 
+label + label::before {
+  content: "$"
+}
+
 body {
   padding: 1em 5%;
   max-width: 1000px;
