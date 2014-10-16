@@ -4,14 +4,15 @@ include('include/header.php');
 ?>
 
 <main>
-	<header>
-		<h1>About Us</h1>
-	</header>
-	<article>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <header>
+        <h1>About Us</h1>
+    </header>
+    <article>
+        <!--Source: http://www.foodandwine.com/slideshows/best-burgers-in-the-us-->
+        <p>The burger, America’s quintessential comfort food, can now be enjoyed in an impossibly endless number of ways. There are round-the-clock burgers at 24-hour-roadside joints and ephemeral late-night burgers sold out in mere minutes; burgers grilled in hundred-year-old cast-iron broilers and burgers steamed in state-of-the-art ovens; burgers crafted from Kobe beef imported from Japan and burgers made with Black Angus beef from just down the road. It’s clearly a great time to love the burger. And we bring you the best.</p>
 
-		<p>Logo: Hamburger by Florent Artis from The Noun Project</p>
-	</article>
+        <p>Logo: Hamburger by Florent Artis from The Noun Project</p>
+    </article>
 </main>
 
 <?php
