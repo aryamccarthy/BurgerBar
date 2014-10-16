@@ -43,7 +43,16 @@ $(document).ready(function() {
   $(document).on('submit', '#payment', function(event) {
     window.onbeforeunload = null;
   });
+  
+  $('[name="sides"]').on('change', limitSelectionToOne);
 });
+
+function limitSelectionToOne(event) {
+  if ($('input[type=checkbox]:checked').length > 1) {
+    $(this).prop('checked', false);
+    alert("You can only choose 1.");
+  }
+}
 
 function showUser() {
   if (loggedIn()) {
@@ -209,6 +218,8 @@ function setIDsToUnchecked(ids) {
   }
 
 }
+
+
 
 function clearCustomOrderForm() {
   var radioIDs = ["#third_beef", "#white", "#cheddar"];
