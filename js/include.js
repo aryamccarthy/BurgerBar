@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  //TODO: Delete fillCommonTags(). See note below. -Luke
-  fillCommonTags();
   var ticket = document.getElementById('active_ticket');
   $("#custom_order_link").click(function(event){
     event.preventDefault();
@@ -22,6 +20,7 @@ $(document).ready(function() {
   });
 
   /* A cheap hack, this doesn't preserve across pages.*/
+  // TODO: Make not a cheap hack.
   $(document).on('submit', '#login_form', function (event) {
     event.preventDefault();
     var first_name = $("#login_email").val(); // CHANGE THIS.
@@ -101,12 +100,6 @@ function loggedIn() {
   return localStorage.getItem("first_name") !== null;
 }
 
-//TODO: start using the php files and delete this.
-//  Luke put this stuff in header.php
-function fillCommonTags() {
-  $("header").first().load("header.html");
-  $("nav").first().load("nav.html");
-};
 
 /* Protects your partially-filled custom order form.
  * Source: http://stackoverflow.com/questions/7317273/warn-user-before-leaving-page-with-unsaved-changes
