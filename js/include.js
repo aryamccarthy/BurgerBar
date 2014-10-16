@@ -99,9 +99,9 @@ function updateTicketForCustomOrder() {
         }
       }
     }  
+
     var entry = document.createElement('li');
-    entry.innerHTML=(patty + "\n" + pattyPrice + "\n" + bun + "\n" + cheese + "\n" + toppingsList + "\n" + sauceList + "\n" +sideList );
-    //entry.innerHTML=("A "+patty+"  patty on a "+bun+" bun with "+cheese+" cheese, topped with "+toppingsList+" "+sauceList+" with a side of "+sideList+" ");
+    entry.innerHTML=(patty + " patty on a " + bun + " bun with " + cheese + "<br> Topped with: " + toppingsList + "<br>Sauces: " + sauceList + "<br> Sides: " +sideList );
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     createDeleteButton(entry);  
     createQuantityAdjuster(entry); 
