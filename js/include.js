@@ -41,13 +41,11 @@ if (document.getElementById('ordering')) {
     window.onbeforeunload = closeEditorWarning;
 }
 
-// TODO: fix this to show the contents of payment-from.php
 function launchDialog() { 
-    
+    document.getElementById("paymentDialog").showModal(); 
 }
 
 var ticketItemCounter = 0;
-
 
 //for menu burgers (index.html) and past orders
 function updateTicket() {
