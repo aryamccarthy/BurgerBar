@@ -29,7 +29,7 @@ $app->post('/login', function() {
 	$args[":email"] = $_POST['email'];
 	$args[":password"] = $_POST['password'];
 	$statement = $pdo->prepare(
-		"SELECT * FROM User
+		"SEECT * FROM User
 		WHERE email = :email AND password = :password;");
 	if ($statement->execute($args)) {
 		if ($row = $statement->fetch()) {
@@ -90,29 +90,11 @@ $app->post('/pastOrders', function() {
 });
 
 /**
-*	Is New Email
+*	Get Menu
 *
-*	
+*	Owner: Nicole
 */
-$app->post('/isNewEmail', function() {
-
-});
-
-/**
-*	Get All Burger Components
-*
-*
-*/
-$app->get('/getAllBurgerComponents', function() {
-
-});
-
-/**
-*	Get All Burger Component By Type
-*
-*	
-*/
-$app->get('/getAllBurgerComponentsByType', function() {
+$app->get('/getMenu', function() {
 
 });
 
