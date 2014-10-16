@@ -1,7 +1,6 @@
 $(document).ready(function() {
   //TODO: Delete fillCommonTags(). See note below. -Luke
   fillCommonTags();
-  showUser();
   var ticket = document.getElementById('active_ticket');
   $("#custom_order_link").click(function(event){
     event.preventDefault();
@@ -42,15 +41,21 @@ $(document).ready(function() {
     window.location = 'index.html';
     showUser();
   });
+  showUser();
 });
 
 function showUser() {
+  console.log("Called showUser()");
   if (loggedIn()) {
+    console.log("User was logged in during call.");
     var first_name = getUserFirstName();
     var welcome = "Hello, " + first_name + "!";
-    $("#user_hello").text(first_name);
-    $("#login_section").hide();
-    $("#user_section").show();
+    $("#user_hello").text(welcome);
+    $("#login_section").css('display', 'none');
+    $("#user_section").css('display', 'inherit');
+  }
+  else {
+    console.log("User not logged in.");
   }
 }
 
@@ -107,15 +112,18 @@ function fillCommonTags() {
  * Source: http://stackoverflow.com/questions/7317273/warn-user-before-leaving-page-with-unsaved-changes
  */
 function closeEditorWarning() {
-    return 'It looks like you have been editing something -- if you leave before submitting your changes will be lost.';
+    return 'It looks like you were preparing an order -- if you leave before submitting your order will be lost.';
 }
-if (document.getElementById('ordering')) {
-    window.onbeforeunload = closeEditorWarning;
+/** Returns whether there are items in the current ticket. */
+function wasOrdering() {
+  return $("[id^='ticketItem']").length !== 0
+}
+function guardPartialOrder() {
+  console.log("guardPartialOrder called.");
+  window.onbeforeunload = wasOrdering() ? closeEditorWarning : null;
 }
 
-function launchDialog() { 
-    document.getElementById("paymentDialog").showModal(); 
-}
+
 
 var ticketItemCounter = 0;
 
@@ -128,12 +136,14 @@ function updateTicket(selectedBurger) {
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     createDeleteButton(entry);   
     createQuantityAdjuster(entry); 
-    ticket.appendChild(entry);       
+    ticket.appendChild(entry);
+    guardPartialOrder();       
 }
 
 function removeTicketItem(itemId){
     var item = document.getElementById(itemId);
     ticket.removeChild(item);
+    guardPartialOrder();
 }
 // http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
 
@@ -178,6 +188,7 @@ function updateTicketForCustomOrder() {
     createDeleteButton(entry);  
     createQuantityAdjuster(entry); 
     ticket.appendChild(entry);
+    guardPartialOrder();
 }
 
 function createQuantityAdjuster(ticketElement){
