@@ -40,6 +40,9 @@ $(document).ready(function() {
     window.location = 'index.php'; //Luke changed this to .php
   });
   showUser();
+  $(document).on('submit', '#payment', function(event) {
+    window.onbeforeunload = null;
+  });
 });
 
 function showUser() {
@@ -106,7 +109,6 @@ function wasOrdering() {
   return $("[id^='ticketItem']").length !== 0
 }
 function guardPartialOrder() {
-  console.log("guardPartialOrder called.");
   window.onbeforeunload = wasOrdering() ? closeEditorWarning : null;
 }
 
@@ -176,6 +178,7 @@ function updateTicketForCustomOrder() {
     createQuantityAdjuster(entry); 
     ticket.appendChild(entry);
     guardPartialOrder();
+    clearCustomOrderForm();
 }
 
 function createQuantityAdjuster(ticketElement){
@@ -194,4 +197,24 @@ function createDeleteButton(ticketElement){
     deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'")');
     ticketElement.appendChild(deleteButton);
     ticketItemCounter+=1;
+}
+
+function setIDsToChecked(ids) {
+  for (var i = 0; i < ids.length; ++i) {
+    $(ids[i]).prop('checked', true);
+  }
+}
+
+function setIDsToUnchecked(ids) {
+  for (var i = 0; i < ids.length; ++i) {
+    $(ids[i]).prop('checked', false);
+  }
+
+}
+
+function clearCustomOrderForm() {
+  var radioIDs = ["#third_beef", "#white", "#cheddar"];
+  setIDsToChecked(radioIDs);
+  var checkBoxIDs = ["#tomatoes", "#lettuce", "#onions", "#pickles", "#red_onion", "#bacon", "#mushrooms", "#jalapenos", "#ketchup", "#mustard", "#mayonnaise", "#bbq", "#french_fries", "#tater_tots", "#onion_rings"];
+  setIDsToUnchecked(checkBoxIDs);
 }
