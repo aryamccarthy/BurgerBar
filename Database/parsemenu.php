@@ -22,11 +22,7 @@ Futre work:
 	function getDBConnection() { #connects to sql database
 		try {
 			$pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
-<<<<<<< HEAD
 				"root", "root");
-=======
-				"root", "<password>");
->>>>>>> 7bb81cc07669e0e9c4d377a7a897973b4f63af97
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
@@ -52,13 +48,8 @@ Futre work:
 		$insertComp->bindValue(':maxQuantity', 1);
 		
 		$insertItem = $pdo->prepare(
-<<<<<<< HEAD
-			"INSERT INTO MenuItem(name, price, available, idMenuComponent)
-			VALUES (:name, :price, :isAvailable, :menuComponentID);"
-=======
 			"INSERT INTO MenuItem(name, price, available, MenuComponent_idMenuComponent)
 			VALUES (:name, :price, :available, :menuComponentID);"
->>>>>>> 7bb81cc07669e0e9c4d377a7a897973b4f63af97
 		);
 		$insertItem->bindParam(':name', $name);
 		$insertItem->bindParam(':price', $price);
