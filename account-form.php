@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "Burger Bar: Create Account";
+$pageTitle = "Burger Bar: Register";
 include('include/header.php');
 ?>
 <main>

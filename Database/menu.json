@@ -50,8 +50,8 @@
                 "price": 0.35
             }
         ],
-		"toppings": [
-			{
+	"toppings": [
+	    {
                 "name": "Tomatoes",
                 "price": 0
             },
@@ -67,11 +67,11 @@
                 "name": "Pickles",
                 "price": 0
             },
-			{
-				"name": "Bacon",
-				"price": 1
-			},
-			{
+	    {
+		"name": "Bacon",
+		"price": 1
+	    },
+            {
                 "name": "Red onion",
                 "price": 0
             },
@@ -79,7 +79,7 @@
                 "name": "Mushrooms",
                 "price": 0
             },
-			{
+	    {
                 "name": "Jalapenos",
                 "price": 0
             }

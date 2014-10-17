@@ -1,0 +1,34 @@
+{
+     "email" : "rlaugia@smu.edu",
+     "order" : 
+     {
+          "timeStamp" : "2014-02-21 18:32:15",
+          "burgers" : 
+          [
+               [ 
+                    ["idMenuItem" : 5],
+                    ["idMenuItem" : 8],
+                    ["idMenuItem" : 0],
+                    ["idMenuItem" : 23],
+                    ["idMenuItem" : 19],
+                    ["idMenuItem" : 20],
+                    ["idMenuItem" : 12],
+                    ["idMenuItem" : 11],
+                    ["idMenuItem" : 13],
+                    ["idMenuItem" : 14]
+               ],
+               [ 
+                    ["idMenuItem" : 6],
+                    ["idMenuItem" : 9],
+                    ["idMenuItem" : 0],
+                    ["idMenuItem" : 23],
+                    ["idMenuItem" : 22],
+                    ["idMenuItem" : 20],
+                    ["idMenuItem" : 12],
+                    ["idMenuItem" : 11],
+                    ["idMenuItem" : 13],
+                    ["idMenuItem" : 14]
+               ]   
+          ]        
+     }
+}
