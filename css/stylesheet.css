@@ -4,6 +4,10 @@ article[id$="ordering"] {
   display: none;
 }
 
+#ordering {
+  margin-bottom: 2em;
+}
+
 article[id$="ordering"].selected {
   display: inherit;
 }

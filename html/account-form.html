@@ -1,83 +1,83 @@
 <!doctype html>
 <html>
 <head>
-<title>Burger Bar</title>
-		<meta charset="UTF-8">		
-		<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/include.js"></script>
+	<title>Burger Bar</title>
+	<meta charset="UTF-8">		
+	<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/include.js"></script>
 </head>
 <body>
 	<header><!--Appears while not logged in.-->
-<section id="title">
-	<a href="index.html">
-		<hgroup>
-			<h1>Burger Bar</h1>
-		</hgroup>
-	</a>
-</section>
-<section id="login_section">
-	<form id="login_form">
-		<fieldset>
-			<legend>Login</legend>
-				<!--Pattern for noncompliant browsers from http://stackoverflow.com/questions/5601647/html5-email-input-pattern-attribute -->
-				<input type="email" id="login_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required/>
-				<input type="password" id="login_password" pattern=".{8,24}" placeholder="Password" required/>
-		</fieldset>
-		<input type="submit" id="login_submit" style="visibility: hidden; position: absolute;" />
-	</form>
-</section>
-<!--Appears while logged in until logout.-->
-<section id="user_section">
-	<h1 id="user_hello">Hello, $$USER$$.</h1>
-</section></header>
+		<section id="title">
+			<a href="index.html">
+				<h1>Burger Bar</h1>
+			</a>
+		</section>
+		<section id="login_section">
+			<form id="login_form">
+				<fieldset>
+					<legend>Login</legend>
+					<!--Pattern for noncompliant browsers from http://stackoverflow.com/questions/5601647/html5-email-input-pattern-attribute -->
+					<input type="email" id="login_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required/>
+					<input type="password" id="login_password" pattern=".{8,24}" placeholder="Password" required/>
+				</fieldset>
+				<input type="submit" id="login_submit" style="visibility: hidden; position: absolute;" />
+			</form>
+		</section>
+		<!--Appears while logged in until logout.-->
+		<section id="user_section">
+			<h1 id="user_hello">Hello, $$USER$$.</h1>
+		</section>
+	</header>
 	<nav>
-<ul>
-  <li><a href="account-form.html">Register</a></li>
-  <li><a href="index.html">Order</a></li>
-  <li><a href="about.html">About Us</a></li>
-</ul>	</nav>
+		<ul>
+			<li><a href="account-form.html">Register</a></li>
+			<li><a href="index.html">Order</a></li>
+			<li><a href="about.html">About Us</a></li>
+		</ul>
+	</nav>
 	<main>
-<form id=login action= "index.html">
-	<fieldset>
-		<legend>Your details</legend>
-		<ol>
-			<li>
-				<label for=first_name>First name</label>
-				<input id=first_name name=first_name type=text placeholder="First name" required autofocus>
-			</li>
-			<li>
-				<label for=last_name>Last name</label>
-				<input id=last_name name=last_name type=text placeholder="Last name" required>
-			</li>
-			<li>
-				<label for=email>Email</label>
-				<input id=email name=email type=email placeholder="example@domain.com" required>
-			</li>
-			<li>
-				<label for=password>Password (8 or more characters)</label>
-				<input id=password name=password type=password pattern=".{8,}" placeholder="Password" required>
-			</li>
-			<li>
-				<label for=provider>Provider</label>
-			<select name="provider" id="provider">
-				<option value="visa">Visa</option>
-				<option value="MasterCard">MasterCard</option>
-				<option value="american_express" selected>American Express</option>
-			</select>
-			</li>
+		<form id=login action= "index.html">
+			<fieldset>
+				<legend>Your details</legend>
+				<ol>
+					<li>
+						<label for=first_name>First name</label>
+						<input id=first_name name=first_name type=text placeholder="First name" required autofocus>
+					</li>
+					<li>
+						<label for=last_name>Last name</label>
+						<input id=last_name name=last_name type=text placeholder="Last name" required>
+					</li>
+					<li>
+						<label for=email>Email</label>
+						<input id=email name=email type=email placeholder="example@domain.com" required>
+					</li>
+					<li>
+						<label for=password>Password (8 or more characters)</label>
+						<input id=password name=password type=password pattern=".{8,}" placeholder="Password" required>
+					</li>
+					<li>
+						<label for=provider>Provider</label>
+						<select name="provider" id="provider">
+							<option value="visa">Visa</option>
+							<option value="MasterCard">MasterCard</option>
+							<option value="american_express" selected>American Express</option>
+						</select>
+					</li>
 
-			<li>
-				<label for=credit_card>Credit card</label>
-				<input id=credit_card name=credit_card type=text placeholder="Credit card number" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$" required>
-				<!--Regex c/o http://www.regular-expressions.info/creditcard.html-->
-			</li>
-		</ol>
-    	<input type="submit" value="Create an account">  	
-  </fieldset>
+					<li>
+						<label for=credit_card>Credit card</label>
+						<input id=credit_card name=credit_card type=text placeholder="Credit card number" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$" required>
+						<!--Regex c/o http://www.regular-expressions.info/creditcard.html-->
+					</li>
+				</ol>
+				<input type="submit" value="Create an account">  	
+			</fieldset>
 
-</form>
-</main>
+		</form>
+	</main>
 </body>
 </html>

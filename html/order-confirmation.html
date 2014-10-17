@@ -1,50 +1,49 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Burger Bar</title>
-		<meta charset="UTF-8">
-		<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-		<meta name="description" content="About">
-		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/include.js"></script>
-	</head>
-	<body>
-		<header><!--Appears while not logged in.-->
-<section id="title">
-	<a href="index.html">
-		<hgroup>
-			<h1>Burger Bar</h1>
-		</hgroup>
-	</a>
-</section>
-<section id="login_section">
-	<form id="login_form">
-		<fieldset>
-			<legend>Login</legend>
-				<!--Pattern for noncompliant browsers from http://stackoverflow.com/questions/5601647/html5-email-input-pattern-attribute -->
-				<input type="email" id="login_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required/>
-				<input type="password" id="login_password" pattern=".{8,24}" placeholder="Password" required/>
-		</fieldset>
-		<input type="submit" id="login_submit" style="visibility: hidden; position: absolute;" />
-	</form>
-</section>
-<!--Appears while logged in until logout.-->
-<section id="user_section">
-	<h1 id="user_hello">Hello, $$USER$$.</h1>
-</section></header>
-		<nav>
-<ul>
-  <li><a href="account-form.html">Register</a></li>
-  <li><a href="index.html">Order</a></li>
-  <li><a href="about.html">About Us</a></li>
-</ul>		</nav>		<main>
+<head>
+	<title>Burger Bar</title>
+	<meta charset="UTF-8">
+	<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<meta name="description" content="About">
+	<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/include.js"></script>
+</head>
+<body>
+	<header><!--Appears while not logged in.-->
+		<section id="title">
+			<a href="index.html"><h1>Burger Bar</h1></a>
+		</section>
+		<section id="login_section">
+			<form id="login_form">
+				<fieldset>
+					<legend>Login</legend>
+					<!--Pattern for noncompliant browsers from http://stackoverflow.com/questions/5601647/html5-email-input-pattern-attribute -->
+					<input type="email" id="login_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required/>
+					<input type="password" id="login_password" pattern=".{8,24}" placeholder="Password" required/>
+				</fieldset>
+				<input type="submit" id="login_submit" style="visibility: hidden; position: absolute;" />
+			</form>
+		</section>
+		<!--Appears while logged in until logout.-->
+		<section id="user_section">
+			<h1 id="user_hello">Hello, $$USER$$.</h1>
+		</section>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="account-form.html">Register</a></li>
+			<li><a href="index.html">Order</a></li>
+			<li><a href="about.html">About Us</a></li>
+		</ul>		
+	</nav>
+	<main>
 		<header>
 			<h1>Thanks for your order!</h1>
 		</header>
 		<article>
 			<p>Your order should be ready within the next 25 minutes. For information, including the Burger Bar food truck's current location, call <a href="tel:+18005552564">800-555-2564</a>. For a decade, the Burger Bar has provided top-notch service to the Dallas-Fort Worth Metroplex, and we're proud to serve every delicious, fresh burger from only the finest Ebola-free fare. We appreciate your patronage and the entirety of DFW's cultural mixtures. Visit us or our sister truck, the Taco Truck, today!</p>
 		</article>
-		</main>
-	</body>
+	</main>
+</body>
 </html>
