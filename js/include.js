@@ -1,9 +1,9 @@
 $(document).ready(function() {
-  if (localStorage['emails'] === undefined) {
-    localStorage['emails'] = JSON.stringify(["admccarthy@gmail.com", "rsward@gmail.com"]);
+  if (localStorage.emails === undefined) {
+    localStorage.emails = JSON.stringify(["admccarthy@gmail.com", "rsward@gmail.com"]);
     var rebecca = {"first_name":"Rebecca", "last_name": "Ward", "email": "rsward@gmail.com", "password": "passward", "credit_card": "3734123412341234", "provider": "MasterCard"};
     var arya = {"first_name":"Arya", "last_name": "McCarthy", "email": "admccarthy@gmail.com", "password": "facebook", "credit_card": "5432432143214321", "provider": "visa"};
-    localStorage['users'] = JSON.stringify([rebecca, arya]);
+    localStorage.users = JSON.stringify([rebecca, arya]);
   }
 
   var ticket = document.getElementById('active_ticket');
@@ -26,21 +26,19 @@ $(document).ready(function() {
     $("#past_ordering").addClass("selected");
   });
 
-  /* A cheap hack, this doesn't preserve across pages.*/
-  // TODO: Make not a cheap hack.
   $(document).on('submit', '#login_form', function (event) {
     event.preventDefault();
-    var email = $("#login_email").val()
+    var email = $("#login_email").val();
     if (userExists(email)) {
-      var users = JSON.parse(localStorage['users']);
+      var users = JSON.parse(localStorage.users);
       for (var i = 0; i < users.length; ++i) {
-        if (users[i]['email'] === email && users[i]['password'] === $("#login_password").val()) {
-          localStorage.setItem("first_name", users[i]['first_name']);
-          localStorage.setItem("last_name", users[i]['last_name']);
-          localStorage.setItem("email", users[i]['email']);
-          localStorage.setItem("password", users[i]['password']);
-          localStorage.setItem("credit_card", users[i]['credit_card']);
-          localStorage.setItem("provider", users[i]['provider']);
+        if (users[i].email === email && users[i].password === $("#login_password").val()) {
+          localStorage.first_name = users[i].first_name;
+          localStorage.last_name = users[i].last_name;
+          localStorage.email = users[i].email;
+          localStorage.password = users[i].password;
+          localStorage.credit_card = users[i].credit_card;
+          localStorage.provider = users[i].provider;
           showUser();
           return;
         }
@@ -54,22 +52,22 @@ $(document).ready(function() {
   $(document).on('submit', '#login', function (event) {
     event.preventDefault();
     if (!userExists($("#email").val())) {
-      localStorage.setItem("first_name", $("#first_name").val());
-      localStorage.setItem("last_name", $("#last_name").val());
-      localStorage.setItem("email", $("#email").val());
-      localStorage.setItem("password", $("#password").val());
-      localStorage.setItem("credit_card", $("#credit_card").val());
-      localStorage.setItem("provider", $("#provider").val());
-      localStorage['emails'] = appendElementToJsonArray($("#email").val(), localStorage['emails']);
+      localStorage.first_name = $("#first_name").val();
+      localStorage.last_name = $("#last_name").val();
+      localStorage.email = $("#email").val();
+      localStorage.password = $("#password").val();
+      localStorage.credit_card = $("#credit_card").val();
+      localStorage.provider = $("#provider").val();
+      localStorage.emails = appendElementToJsonArray($("#email").val(), localStorage.emails);
       var newUser = {
-        "first_name": localStorage['first_name'],
-        "last_name": localStorage['last_name'],
-        "email": localStorage['email'],
-        "password": localStorage['password'],
-        "credit_card": localStorage['credit_card'],
-        "provider": localStorage['provider']
+        "first_name": localStorage.first_name,
+        "last_name": localStorage.last_name,
+        "email": localStorage.email,
+        "password": localStorage.password,
+        "credit_card": localStorage.credit_card,
+        "provider": localStorage.provider
       };
-      localStorage['users'] = appendElementToJsonArray(newUser, localStorage['users']);
+      localStorage.users = appendElementToJsonArray(newUser, localStorage.users);
       window.location = 'index.html';
     }
     else {
@@ -86,18 +84,14 @@ $(document).ready(function() {
 });
 
 function appendElementToJsonArray(str, json) {
-  console.log(str);
   var arr = JSON.parse(json);
-  console.log(arr);
   arr.push(str);
-  console.log(arr);
-  new_json = JSON.stringify(arr);
-  console.log(new_json);
+  var new_json = JSON.stringify(arr);
   return new_json;
 }
 
 function userExists(email) {
-  return (localStorage['emails'] !== undefined) && (JSON.parse(localStorage['emails']).indexOf(email) !== -1);
+  return (localStorage.emails !== undefined) && (JSON.parse(localStorage.emails).indexOf(email) !== -1);
 }
 
 function limitSelectionToOne() {
@@ -171,7 +165,7 @@ function closeEditorWarning() {
 }
 /** Returns whether there are items in the current ticket. */
 function wasOrdering() {
-  return $("[id^='ticketItem']").length !== 0
+  return $("[id^='ticketItem']").length !== 0;
 }
 function guardPartialOrder() {
   window.onbeforeunload = wasOrdering() ? closeEditorWarning : null;
@@ -254,7 +248,7 @@ function updateTicketForCustomOrder() {
         if(cheese[i].checked){
          cheeseId = cheese[i].id;
          cheesePrice = document.getElementById(cheeseId+"price").innerHTML;
-         cheeseText = document.querySelector('input[name = "cheese"]:checked').value
+         cheeseText = document.querySelector('input[name = "cheese"]:checked').value;
         }
       }
     }
@@ -288,10 +282,10 @@ function updateTicketForCustomOrder() {
         }
       }
     }
-    if (sauceList==""){
+    if (sauceList===""){
       sauceList="none <br>";
     }
-    if (toppingsList==""){
+    if (toppingsList===""){
       toppingsList= "none <br>";
     }
     var sideList="";
@@ -304,8 +298,8 @@ function updateTicketForCustomOrder() {
         }
       }
     }  
-    if (sideList==""){
-      sideList="none <br>"
+    if (sideList===""){
+      sideList="none <br>";
     }
 
     totalPrice += +sidesPrice;
@@ -314,7 +308,7 @@ function updateTicketForCustomOrder() {
     var priceEntry = document.createElement('li');
     
     //Attach data to elements, create unique ids for easy deletion
-    priceEntry.innerHTML=totalPrice.toFixed(2);;
+    priceEntry.innerHTML=totalPrice.toFixed(2);
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
     priceEntry.setAttribute("class","burger_price");
     var quantity = document.getElementById("burger_quantity").value;
