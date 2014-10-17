@@ -314,18 +314,30 @@ $app->get('/getMenu', function() {
     global $pdo;
 
     $statement = $pdo->prepare(
-        "SELECT MenuComponent.name, MenuItem.idMenuComponent,
-            idMenuItem, MenuItem.name, price
+        "SELECT MenuComponent.name AS compName, MenuItem.idMenuComponent AS compID, 
+            idMenuItem AS itemID, MenuItem.name AS itemName, price
         FROM MenuItem
-        JOIN MenuComponent
-        USING (idMenuComponent)
+        JOIN MenuComponent USING (idMenuComponent)
         ORDER BY idMenuComponent;");
-    $rows = array();
-    $statement->execute();
-    while($temp = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)){
-        array_push($rows, $temp);
+    if ($statement->execute()) {
+        $compGroup = NULL;
+        $group;
+        while($row = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)){
+            if($compGroup != $row['compName']){
+                $compGroup = $row['compName'];
+                $group[$compGroup] = array();
+            }
+            $item['name'] = $row['itemName'];
+            $item['price'] = $row['price'];
+            array_push($group[$compGroup],$item);
+        }
+
+        $result['menu']=$group;
+    } else {
+        $result['success']=false;
+        $result['error']=$statement->errorInfo();
     }
-    echo json_encode(array('Menu' => $rows));
+    echo json_encode($result);
 });
 
 $app->run();
