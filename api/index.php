@@ -171,11 +171,11 @@ $app->get('/getMenu', function() {
         JOIN MenuComponent
         USING (idMenuComponent)
         ORDER BY idMenuComponent;");
-    $menu = array();
-    while($temp = $statement->fetch_assoc()){
-        $menu[] = $temp;
+    $rows = array();
+    while($temp = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)){
+        $rows[] = $temp;
     }
-    echo json_encode($menu);
+    echo json_encode(array('Menu' => $rows));
 });
 
 $app->run();
