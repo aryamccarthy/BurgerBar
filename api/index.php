@@ -93,7 +93,9 @@ $app->post('/createAccount', function() {
 $app->get('/getMenuBurger', function() {
     global $pdo;
     $statement = $pdo->prepare(
-        "SELECT * from "
+        "SELECT idMenuBurger AS idBurger, MenuBurger.name AS burgerName, photoFilePath, idMenuItem as idItem, MenuItem.name AS itemName
+        FROM MenuBurger_has_MenuItem
+        NATURAL JOIN (MenuBurger, MenuItem);"
     )
 });
 

@@ -48,7 +48,7 @@ Futre work:
 		$insertComp->bindValue(':maxQuantity', 1);
 		
 		$insertItem = $pdo->prepare(
-			"INSERT INTO MenuItem(name, price, available, MenuComponent_idMenuComponent)
+			"INSERT INTO MenuItem(name, price, available, idMenuComponent)
 			VALUES (:name, :price, :available, :menuComponentID);"
 		);
 		$insertItem->bindParam(':name', $name);
@@ -147,7 +147,7 @@ Futre work:
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        #buildItemInfo($pdo, $menu);
+        buildItemInfo($pdo, $menu);
         $order = buildOrder($pdo, $order_loc);	
         
 ?>
