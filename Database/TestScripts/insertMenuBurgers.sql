@@ -31,11 +31,11 @@ Insert Into UserOrder Values
 (0003, NOW(), "zfout@smu.edu");
 
 Insert Into OrderBurger Values
-(0001),
-(0002),
-(0003);
+(null),
+(null),
+(null)
 
-Insert Into Order_has_OrderBurger Values 
+Insert Into UserOrder_has_OrderBurger Values 
 (0001, 0001),
 (0002, 0002),
 (0003, 0003);
