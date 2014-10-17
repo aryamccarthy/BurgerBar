@@ -23,7 +23,7 @@ Futre work:
 	    try {
 	    	//127.0.0.1
 	         $pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
-			"root", "3.00x10^8m/s");
+			"root", "root");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
