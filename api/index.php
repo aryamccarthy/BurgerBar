@@ -100,7 +100,25 @@ $app->post('/placeOrder', function() {
 *   Owner: Danny
 */
 $app->post('/pastOrders', function() {
-
+	global $pdo;
+    
+    $args[":email"] = $_GET['email'];
+    $args[":number"] = $_GET['number'];
+    
+    $statement = $pdo->prepare("SELECT timestamp, email FROM Order WHERE "
+            . "email = :email LIMIT :number");
+   
+    
+    if ($statement->execute($args)) {
+        $result["success"] = true;
+        
+//store values in $result
+    } 
+    else {
+        $result["success"]=false;
+        $result["error"]=$statement->errorInfo();
+    }
+    echo json_encode($result);
 });
 
 /**
@@ -109,7 +127,20 @@ $app->post('/pastOrders', function() {
 *   Owner: Nicole
 */
 $app->get('/getMenu', function() {
+    global $pdo;
 
+    $statement = $pdo->prepare(
+        "SELECT MenuComponent.name, MenuItem.idMenuComponent,
+            idMenuItem, MenuItem.name, price
+        FROM MenuItem
+        JOIN MenuComponent
+        USING (idMenuComponent)
+        ORDER BY idMenuComponent;");
+    $menu = array();
+    while($temp = $statement->fetch_assoc()){
+        $menu[] = $temp;
+    }
+    echo json_encode($menu);
 });
 
 $app->run();
