@@ -73,9 +73,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `BurgerBar`.`Order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BurgerBar`.`Order` ;
+DROP TABLE IF EXISTS `BurgerBar`.`UserOrder` ;
 
-CREATE TABLE IF NOT EXISTS `BurgerBar`.`Order` (
+CREATE TABLE IF NOT EXISTS `BurgerBar`.`UserOrder` (
   `idOrder` INT NOT NULL AUTO_INCREMENT COMMENT '	',
   `timestamp` DATETIME NULL,
   `User_email` VARCHAR(45) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `BurgerBar`.`Order_has_OrderBurger` (
   INDEX `fk_Order_has_OrderBurger_Order1_idx` (`Order_idOrder` ASC),
   CONSTRAINT `fk_Order_has_OrderBurger_Order1`
     FOREIGN KEY (`Order_idOrder`)
-    REFERENCES `BurgerBar`.`Order` (`idOrder`)
+    REFERENCES `BurgerBar`.`UserOrder` (`idOrder`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Order_has_OrderBurger_OrderBurger1`

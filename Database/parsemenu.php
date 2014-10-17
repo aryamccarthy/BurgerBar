@@ -22,7 +22,7 @@ Futre work:
 	function getDBConnection() { #connects to sql database
 		try {
 			$pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
-				"root", "3.00x10^8m/s");
+				"root", "<password>");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
@@ -96,13 +96,17 @@ Futre work:
             $email = $order['email'];
             $timeStamp = $order['order']['timeStamp'];
             $burgers = $order['order']['burgers'];
+            $burgerIds = array();
 
             foreach ($burgers as $burger => $ingredients) {
-                $insertOrder = $pdo->prepare(
+                array_push($burgerIds, $burger);
+            }
+
+            foreach ($burgerIds as $id) {
+               $insertOrder = $pdo->prepare(
                      "INSERT INTO OrderBurger(idOrderBurger)
-                     VALUES (:idOrderBurger)"
+                     VALUES (NULL)"
                 );
-                $insertOrder->bindParam(':idOrderBurger', $burger);
 
                 if($insertOrder->execute()) {
                      echo "success<br>";
@@ -111,7 +115,10 @@ Futre work:
                        $errorData = $insertOrder->errorInfo();
                        echo $errorData[2] . "<br>";
                 }
+            }
 
+            
+           /* foreach ($burgers as $burger => $ingredients) {    
                 foreach ($ingredients as $id => $toppingObj) {
                     foreach ($toppingObj as $item => $id) {
                          $insertOrderBurger = $pdo->prepare(
@@ -130,7 +137,7 @@ Futre work:
                          }
                     }
                 }
-            } 
+            }*/ 
 
             #var_dump($order['order']['burgers'][0][1]);
         }
@@ -139,7 +146,7 @@ Futre work:
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        $order = buildOrder($pdo, $order_loc);
-	#buildItemInfo($pdo, $menu);
+        #buildItemInfo($pdo, $menu);
+        $order = buildOrder($pdo, $order_loc);	
         
 ?>
