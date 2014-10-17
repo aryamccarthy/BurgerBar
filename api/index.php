@@ -100,19 +100,21 @@ $app->post('/placeOrder', function() {
 *   Owner: Danny
 */
 $app->post('/pastOrders', function() {
-    global $pdo;
+	global $pdo;
     
-    $email = $_POST['email'];
-    $number = $_POST['number'];
+    $args[":email"] = $_GET['email'];
+    $args[":number"] = $_GET['number'];
     
-    $statement = $pdo->prepare(
-            );
+    $statement = $pdo->prepare("SELECT timestamp, email FROM Order WHERE "
+            . "email = :email LIMIT :number");
    
     
     if ($statement->execute($args)) {
         $result["success"] = true;
+        
 //store values in $result
-    } else {
+    } 
+    else {
         $result["success"]=false;
         $result["error"]=$statement->errorInfo();
     }
