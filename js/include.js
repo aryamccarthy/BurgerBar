@@ -176,8 +176,8 @@ function guardPartialOrder() {
 }
 
 var ticketItemCounter = 0;
- var ticketTotal=0.00; 
- var quantityCheck = document.getElementsByClassName('adjuster');
+var ticketTotal=0.00; 
+var quantityCheck = document.getElementsByClassName('adjuster');
 
 
 
@@ -187,16 +187,16 @@ function updateTicket(selectedBurger) {
     var quantity = document.getElementById("burger_quantity").value;
     var price= document.getElementById(selectedBurger+"_price").innerHTML;
    
-    priceEntry.innerHTML=price;
+    priceEntry.innerHTML=price.toFixed(2);;
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
    
     entry.appendChild(document.createTextNode(selectedBurger));
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
    
     createDeleteButton(entry);   
+    var cost=document.getElementById('totalPrice');
     createQuantityAdjuster(entry, quantity, price); 
     updateTicketTotal(quantity, price);
-   
     ticket.appendChild(entry);
     ticket.appendChild(priceEntry);
     guardPartialOrder();       
@@ -220,7 +220,7 @@ function removeTicketItem(itemId, priceId, quantityId){
 function updateTicketTotal(userSetQuantity, burgerCost){
   var priceElement = document.getElementById('total_price');
   ticketTotal+= (userSetQuantity * burgerCost);
-  priceElement.innerHTML=ticketTotal;
+  priceElement.innerHTML=ticketTotal.toFixed(2);
 }
 
 
@@ -238,7 +238,7 @@ function updateTicketForCustomOrder() {
     var cheeseId="";
     var cheesePrice="";
     var cheeseText="";
-
+    var isThereCheese = true;
     with(document.custom_order){
       for (var i=0; i<cheese.length; i++){
         if(cheese[i].checked){
@@ -248,7 +248,9 @@ function updateTicketForCustomOrder() {
         }
       }
     }
-
+    if (cheeseText == ""){
+      cheeseText="none";
+    }
     totalPrice += +pattyPrice;
     totalPrice += +bunPrice;
     totalPrice += +cheesePrice;
@@ -276,6 +278,12 @@ function updateTicketForCustomOrder() {
         }
       }
     }
+    if (sauceList==""){
+      sauceList="none <br>";
+    }
+    if (toppingsList==""){
+      toppingsList= "none <br>";
+    }
     var sideList="";
     with(document.custom_order){
       for(var i = 0; i < sides.length; i++){
@@ -286,17 +294,19 @@ function updateTicketForCustomOrder() {
         }
       }
     }  
-
+    if (sideList==""){
+      sideList="none <br>"
+    }
     totalPrice += +sidesPrice;
     var entry = document.createElement('li');
     var priceEntry = document.createElement('li');
     
-    priceEntry.innerHTML=totalPrice;
+    priceEntry.innerHTML=totalPrice.toFixed(2);;
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
 
     var quantity = document.getElementById("burger_quantity").value;
     
-    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun with " + cheeseText+ "<br>Topped with: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList); 
+    entry.innerHTML=(pattyText + " patty on a " + bunText + " bun <br> Cheese: "  + cheeseText+ "<br>Toppings: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList); 
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     
     createDeleteButton(entry);  
@@ -305,8 +315,9 @@ function updateTicketForCustomOrder() {
     ticketItemCounter+=1;
 
     
-    ticket.appendChild(priceEntry);
     ticket.appendChild(entry);
+        ticket.appendChild(priceEntry);
+
     
     guardPartialOrder();
     clearCustomOrderForm();
@@ -331,11 +342,11 @@ function createQuantityAdjuster(ticketElement, userSetQuantity, burgerPrice){
     if(quantityAdjuster.value > previousQuantity){
 
       ticketTotal+= +burgerPrice;
-      priceElement.innerHTML=ticketTotal;
+      priceElement.innerHTML=ticketTotal.toFixed(2);;
     }
     else {
       ticketTotal-= +burgerPrice;
-      priceElement.innerHTML=ticketTotal;
+      priceElement.innerHTML=ticketTotal.toFixed(2);;
     }
     previousQuantity=quantityAdjuster.value; 
   }, false);
