@@ -81,8 +81,8 @@ $(document).ready(function() {
     window.onbeforeunload = null;
   });
   
-  $('[name="sides"]').on('change', limitSelectionToOne);
-  $('[name="cheese"]').on('change', limitSelectionToOne);
+  $('input:checkbox[name="sides"]').click(limitSelectionToOne);
+  $("input:checkbox[name='cheese']").click(limitSelectionToOne);
 });
 
 function appendElementToJsonArray(str, json) {
@@ -100,12 +100,14 @@ function userExists(email) {
   return (localStorage['emails'] !== undefined) && (JSON.parse(localStorage['emails']).indexOf(email) !== -1);
 }
 
-function limitSelectionToOne(event) {
-  var name = event.target.name;
-  if ($('[name="' + name + '"]:checked').length > 1) {
-    $(this).prop('checked', false);
-    alert("You can only choose 1.");
-  }
+function limitSelectionToOne() {
+    if ($(this).is(":checked")) {
+        var group = "input:checkbox[name='" + $(this).attr("name") + "']";
+        $(group).prop("checked", false);
+        $(this).prop("checked", true);
+    } else {
+        $(this).prop("checked", false);
+    }
 }
 
 function showUser() {
@@ -113,7 +115,7 @@ function showUser() {
     var first_name = getUserFirstName();
     var welcome = "Hello, " + first_name + "!";
     $("#user_hello").text(welcome);
-    // $("#login_section").css('display', 'none');
+    $("#login_section").css('display', 'none');
     $("#user_section").css('display', 'inherit');
   }
 }
@@ -187,7 +189,7 @@ function updateTicket(selectedBurger) {
     var quantity = document.getElementById("burger_quantity").value;
     var price= document.getElementById(selectedBurger+"_price").innerHTML;
    
-    priceEntry.innerHTML=price.toFixed(2);;
+    priceEntry.innerHTML=price;
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
    
     entry.appendChild(document.createTextNode(selectedBurger));

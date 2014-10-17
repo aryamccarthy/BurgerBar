@@ -44,11 +44,11 @@
 
 		<section id="ticket">
 			<h1>Ticket</h1>
-				<ul id="active_ticket">
-				</ul>
+			<ul id="active_ticket">
+			</ul>
 
 		</section>
-			
+		
 
 		<section id="ordering">
 			<nav>
@@ -61,7 +61,7 @@
 			</nav>
 			<article id="custom_ordering" class="selected">
 				<form name="custom_order" action="index.html" method="post">
-					<fieldset>
+					<fieldset class="outer">
 						<legend>Order a custom burger</legend>
 						<fieldset>
 							<legend>Burger type</legend>
@@ -162,26 +162,6 @@
 									<label for="bacon">Bacon</label>
 									<label id= "baconprice">1.00</label>
 
-<<<<<<< Updated upstream
-									</li>
-									<li>
-										<input type="checkbox" name="toppings" id="red_onion" value="Red onion">
-										<label for="red_onion">Red onion</label>
-										<label id="red_onionprice">0.00</label>
-									</li>
-									<li>
-										<input type="checkbox" name="toppings" id="mushrooms" value="Mushrooms">
-										<label for="mushrooms">Mushrooms</label>
-										<label id="mushroomsprice">0.00</label>
-									</li>
-									<li>
-										<input type="checkbox" name="toppings" id="jalapenos" value="Jalapenos">
-										<label for="jalapenos">Jalapenos</label>
-										<label id="jalapenosprice">0.00</label>
-									</li>
-								</ol>
-							</fieldset>
-=======
 								</li>
 								<li>
 									<input type="checkbox" name="toppings" id="red_onion" value="Red onion">
@@ -191,7 +171,7 @@
 								<li>
 									<input type="checkbox" name="toppings" id="mushrooms" value="Mushrooms">
 									<label for="mushrooms">Mushrooms</label>
-									<label id="mushroomprice">0.00</label>
+									<label id="mushroomsprice">0.00</label>
 								</li>
 								<li>
 									<input type="checkbox" name="toppings" id="jalapenos" value="Jalapenos">
@@ -200,7 +180,6 @@
 								</li>
 							</ol>
 						</fieldset>
->>>>>>> Stashed changes
 
 						<fieldset>
 							<legend>Sauces</legend>
@@ -260,7 +239,7 @@
 				<!-- For each burger on the menu -->
 				<!-- Descriptions from http://en.wikipedia.org/wiki/List_of_hamburgers -->
 				<figure>
-					<img src="https://openclipart.org/image/200px/svg_to_png/9096/	Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
 					<figcaption class="burger_label" value="Buffalo Burger">Buffalo Burger</figcaption>  
 					<figcaption class="burger_description">Prepared with meat from the American Bison, buffalo burgers have less cholesterol, less fat, and fewer calories than beef hamburgers and chicken hamburgers. The American Heart Association recommended buffalo burgers in 1997 as more heart-healthy than chicken or beef. </figcaption>  
 					<figcaption class="burger_price" id="Buffalo Burger_price">9.50</figcaption> 
@@ -281,21 +260,21 @@
 					<input type='button' id="Hamdog" onclick='updateTicket(this.id)' value='Add to ticket' />
 				</figure>	
 				<figure>
-					<img src="https://openclipart.org/image/200px/svg_to_png/9096/	Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
 					<figcaption class="burger_label">Luther Burger</figcaption>  
-					<figcaption class="burger_description">A hamburger or cheeseburger prepared with one or more glazed doughnuts in place of the bun. </figcaption>  
+					<figcaption class="burger_description">A hamburger or cheeseburger prepared with one or more glazed doughnuts in place of the bun. </figcaption>
 					<figcaption class="burger_price" id="Luther Burger_price">8.00</figcaption> 
 					<input type='button' id="Luther Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
 				</figure>	
 				<figure>
-					<img src="https://openclipart.org/image/200px/svg_to_png/9096/	Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
 					<figcaption class="burger_label">Teriyaki Burger</figcaption>  
 					<figcaption class="burger_description">Teriyaki burger (テリヤキバーガー?) refers to a variety of hamburger either topped with teriyaki sauce or with the sauce worked into the ground meat patty. </figcaption>  
 					<figcaption class="burger_price" id="Teriyaki Burger_price">7.50</figcaption> 
 					<input type='button' id="Teriyaki Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
 				</figure>
 				<figure>
-					<img src="https://openclipart.org/image/200px/svg_to_png/9096/	Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
 					<figcaption class="burger_label">Naan Burger</figcaption>  
 					<figcaption class="burger_description">Made with naan bread, naan burgers, the use of flatbread creates a taste experience different from hamburgers made with bread.
 					</figcaption>  
@@ -307,10 +286,10 @@
 			<article id="past_ordering">
 				<!-- For each past order-->
 				<figure>
-					<img src="https://openclipart.org/image/200px/svg_to_png/9096/			Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, <Lunch->			</Lunch->Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, <Lunch->			</Lunch->Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
 					<figcaption class="burger_label">Past Order
 					</figcaption>  
-					<figcaption class="burger_description">Lorem ipsum dolor sit amet, 			consectetur adipisicing elit, sed do eiusmod
+					<figcaption class="burger_description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					</figcaption>  
 					<figcaption class="burger_price">10.00
 					</figcaption> 
@@ -319,7 +298,7 @@
 				</figure>	
 			</article>
 		</section>
-		<h3>Total price</h1>
+		<h3>Total price</h3>
 		<ul>
 			<li id="total_price">0.00</li>
 		</ul>
@@ -357,9 +336,11 @@
 						<input id=credit_card name=credit_card type=text placeholder="Credit card number" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$" required>
 						<!--Regex c/o http://www.regular-expressions.info/creditcard.html-->
 					</li>
-				</ol> 
-				<input type="submit" id="confirmPayment" value="Place order">
-				<button type="button" onclick="overlay()">Cancel</button>
+				</ol>
+				<div>
+					<input type="button" onclick="overlay()" value="Cancel">
+					<input type="submit" id="confirmPayment" value="Place order">
+				</div>
 			</fieldset>
 		</form>
 	</dialog>

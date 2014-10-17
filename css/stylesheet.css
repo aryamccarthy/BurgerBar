@@ -12,8 +12,16 @@ article[id$="ordering"].selected {
   display: inherit;
 }
 
-label + label::before, .burger_price::before {
-  content: "$"
+.burger_price::before {
+  content: "$";
+}
+
+fieldset.outer > legend {
+  font-size: 1.25em;
+}
+
+label + label::before {
+  content: " - $";
 }
 
 body {
@@ -24,6 +32,30 @@ body {
   display: grid;
   grid-columns: 75% 0 25%;
   grid-rows: auto 1em auto;
+}
+
+fieldset ol {
+  list-style: none;
+  padding-left: 1.5em;
+  margin-top: 0.25em;
+  margin-bottom: 0.5em;
+}
+
+main > form > fieldset > input {
+  margin-left: 2em;
+}
+
+#login label, dialog label {
+  display: inline-block;
+  width : 100px;
+}
+
+main > article > p:last-child {
+  color: #999;
+}
+
+#login label::after, dialog label::after {
+  content: ": ";
 }
 
 main {
@@ -82,11 +114,10 @@ body > nav ul a {
   float:right;
 }
 
-/*
+
 #user_section {
   display: none;
 }
-*/
 
 
 a {
@@ -104,13 +135,13 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-main nav ul {
+main nav ul, fieldset ol {
   list-style: none;
 }
 
 main nav li {
   display: inline;
-  font-size: 20px;
+  font-size: 1.375em;
 }
 
 main nav li a {
@@ -150,7 +181,6 @@ body > header a h1::before {
      top: 0px;
      width:100%;
      height:100%;
-     text-align:center;
      z-index: 1000;
      background-image:url(../img/Transparent.png);
      /* And because Chrome is needy: */
@@ -165,11 +195,15 @@ body > header a h1::before {
      border:1px solid #000;
      border-radius: 0.5em;
      padding:15px;
-     text-align:center;
+
 }
 
-form ol {
-  /*list-style-type: none;*/
+#paymentDialog form ol {
+  padding-left: 1em;
+}
+
+#paymentDialog form div {
+  text-align: center;
 }
 
 fieldset {
