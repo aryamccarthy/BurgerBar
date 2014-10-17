@@ -97,49 +97,55 @@ Futre work:
             $email = $order['email'];
             $timeStamp = $order['order']['timeStamp'];
             $burgers = $order['order']['burgers'];
-            $burgerIds = array();
+            $orderBurgerIds = array();
 
-            foreach ($burgers as $burger => $ingredients) {
-                array_push($burgerIds, $burger);
-            }
-
-            foreach ($burgerIds as $id) {
+           /* foreach ($burgers as $burger) {
                $insertOrder = $pdo->prepare(
                      "INSERT INTO OrderBurger(idOrderBurger)
                      VALUES (NULL)"
                 );
 
-                if($insertOrder->execute()) {
+                if ($insertOrder->execute()) {
                      echo "success<br>";
                 } else {
                        echo "fail<br>";
                        $errorData = $insertOrder->errorInfo();
                        echo $errorData[2] . "<br>";
                 }
-            }
+            }*/
 
-            
-            foreach ($burgers as $burger => $ingredients) {
+            $orderBurgers = $pdo->prepare("SELECT idOrderBurger FROM OrderBurger");
+            if ($orderBurgers->execute()) {
+                 echo "successfully accessed OrderBurger<br>";
+                 while($row = $orderBurgers->fetch()) {
+                     array_push($orderBurgerIds, $row['idOrderBurger']);
+                 }
+            } else {
+                  echo "fail<br>";
+                  $errorData = $orderBurgers->errorInfo();
+	          echo $errorData[2] . "<br>";
+            }
+    
+            foreach ($burgers as $burger => $ingredients) { 
                 foreach ($ingredients as $id => $toppingObj) {
                     foreach ($toppingObj as $item => $id) {
-                        echo "$item : $id<br>";
-                       /* $insertOrderBurger = $pdo->prepare(
-                              "INSERT INTO OrderBurger_has_MenuItem(OrderBurger_idOrderBurger, MenuItem_idMenuItem) 
+                        $insertOrderBurger = $pdo->prepare(
+                              "INSERT INTO OrderBurger_has_MenuItem(idOrderBurger, idMenuItem) 
                               VALUES (:idOrderBurger, :idMenuItem)"
                          );
-                         $insertOrderBurger->bindParam(':idOrderBurger', $burger);
+                         $insertOrderBurger->bindParam(':idOrderBurger', $orderBurgerIds[$burger]);
                          $insertOrderBurger->bindParam(':idMenuItem', $id);
                          
                          if ($insertOrderBurger->execute()) {
-                              echo "success<br>";
+                              echo "successfully inserted into OrderBurger_has_MenuItem<br>";
                          } else {
                                 echo "fail<br>";
                                 $errorData = $insertOrderBurger->errorInfo();
                                 echo $errorData[2] . "<br>";
-                         }*/
+                         }
                     }
                 }
-            } 
+            }
 
             #var_dump($order['order']['burgers'][0][1]);
         }
@@ -148,7 +154,7 @@ Futre work:
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        buildItemInfo($pdo, $menu);
+        #buildItemInfo($pdo, $menu);
         $order = buildOrder($pdo, $order_loc);	
         
 ?>
