@@ -86,7 +86,23 @@ $app->post('/placeOrder', function() {
 *   Owner: Danny
 */
 $app->post('/pastOrders', function() {
-
+    global $pdo;
+    
+    $email = $_POST['email'];
+    $number = $_POST['number'];
+    
+    $statement = $pdo->prepare(
+            );
+   
+    
+    if ($statement->execute($args)) {
+        $result["success"] = true;
+//store values in $result
+    } else {
+        $result["success"]=false;
+        $result["error"]=$statement->errorInfo();
+    }
+    echo json_encode($result);
 });
 
 /**
