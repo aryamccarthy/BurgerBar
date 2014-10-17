@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BurgerBar`.`MenuComponent` ;
 
 CREATE TABLE IF NOT EXISTS `BurgerBar`.`MenuComponent` (
-  `idMenuComponent` INT NOT NULL,
+  `idMenuComponent` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `minQuantity` INT NOT NULL,
   `maxQuantity` INT NOT NULL,
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BurgerBar`.`MenuItem` ;
 
 CREATE TABLE IF NOT EXISTS `BurgerBar`.`MenuItem` (
-  `idMenuItem` INT NOT NULL,
+  `idMenuItem` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL COMMENT '	',
   `price` FLOAT NULL COMMENT '	',
   `available` TINYINT(1) NULL,
