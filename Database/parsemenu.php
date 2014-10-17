@@ -23,7 +23,7 @@ Futre work:
 	    try {
 	    	//127.0.0.1
 	         $pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
-			"root", "root");
+			"root", "3.00x10^8m/s");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
@@ -94,23 +94,67 @@ Futre work:
         function buildOrder($pdo, $file_name) {
             $json = file_get_contents($file_name);
             $order = json_decode($json, true);
-            $email = $order['email'];
+            $userEmail = $order['email'];
             $timeStamp = $order['order']['timeStamp'];
             $burgers = $order['order']['burgers'];
             $orderBurgerIds = array();
+            $orderId = 0;
+
+            $lName = 'Laugia';
+            $fName = 'Robert';
+            $cardNum = '12345678';
+            $cardType = 'Visa';
+            $phoneNum = '1234';
+            $password = 'pass';            
+ 
+            $insertUser = $pdo->prepare(
+                "INSERT INTO User(email, lName, fName, cardNum, 
+                cardType, PhoneNum, password)
+                VALUES(:email, :lName, :fName, :cardNum, :cardType, :phoneNum, :password)"
+            );
+            $insertUser->bindParam(':email', $userEmail);
+            $insertUser->bindParam(':lName', $lName);
+            $insertUser->bindParam(':fName', $fName);
+            $insertUser->bindParam(':cardNum', $cardNum);
+            $insertUser->bindParam(':cardType', $cardType);
+            $insertUser->bindParam(':phoneNum', $phoneNum);
+            $insertUser->bindParam(':password', $password);
+
+            if ($insertUser->execute()) {
+                echo "Successfully inserted int User<br>";
+            } else {
+                  echo "fail<br>";
+                  $errorData = $insertUser->errorInfo();
+                  echo $errorData[2] . "<br>";
+            }
+
+            $insertOrder = $pdo->prepare(
+                "INSERT INTO UserOrder(timestamp, email)
+                VALUES(:timestamp, :email)"
+            );
+            $insertOrder->bindParam(':timestamp', $timeStamp);
+            $insertOrder->bindParam(':email', $userEmail);
+
+            if ($insertOrder->execute()) {
+                echo "Successfully inserted int UserOrder<br>";
+            } else {
+                  echo "fail<br>";
+                  $errorData = $insertOrder->errorInfo();
+                  echo $errorData[2] . "<br>";
+            } 
 
             foreach ($burgers as $burger) {
-               $insertOrder = $pdo->prepare(
-                     "INSERT INTO OrderBurger(idOrderBurger)
-                     VALUES (NULL)"
+               $insertOrderBurger = $pdo->prepare(
+                   "INSERT INTO OrderBurger(idOrderBurger)
+                   VALUES (NULL)"
                 );
 
-                if ($insertOrder->execute()) {
+                if ($insertOrderBurger->execute()) {
                      echo "success<br>";
                 } else {
-                       echo "fail<br>";
-                       $errorData = $insertOrder->errorInfo();
-                       echo $errorData[2] . "<br>";
+                      echo "fail<br>";
+                      $errorData = $insertOrderBurger->errorInfo();
+                      echo $errorData[2] . "<br>";
                 }
             }
 
@@ -125,13 +169,42 @@ Futre work:
                   $errorData = $orderBurgers->errorInfo();
 	          echo $errorData[2] . "<br>";
             }
+
+            $getOrderId = $pdo->prepare(
+                "SELECT idUserOrder FROM UserOrder
+                WHERE email = :email AND timestamp = :timestamp
+            ");
+             $getOrderId->bindParam(':email', $userEmail); 
+             $getOrderId->bindParam(':timestamp', $timeStamp);
+
+            if ($getOrderId->execute()) {
+                echo "successfully accessed UserOrder<br>";
+                while($row = $getOrderId->fetch()) {
+                    $orderId = $row['idUserOrder'];
+                }
+            }
     
-            foreach ($burgers as $burger => $ingredients) { 
+            foreach ($burgers as $burger => $ingredients) {
+                $insertHasOrderBurger = $pdo->prepare(
+                    "INSERT INTO Order_has_OrderBurger(idUserOrder, idOrderBurger)
+                    VALUES(:idUserOrder, :idOrderBurger)"
+                    );
+                    $insertHasOrderBurger->bindParam(':idUserOrder', $orderId);
+                    $insertHasOrderBurger->bindParam('idOrderBurger', $orderBurgerIds[$burger]);                        
+
+                    if ($insertHasOrderBurger->execute()) {
+                        echo "successfully inserted into OrderBurger_has_OrderBurger<br>";
+                    } else {
+                          echo "fail<br>";
+                          $errorData = $insertHasOrderBurger->errorInfo();
+                          echo $errorData[2] . "<br>";
+                    }
+ 
                 foreach ($ingredients as $id => $toppingObj) {
                     foreach ($toppingObj as $item => $id) {
                         $insertOrderBurger = $pdo->prepare(
-                              "INSERT INTO OrderBurger_has_MenuItem(idOrderBurger, idMenuItem) 
-                              VALUES (:idOrderBurger, :idMenuItem)"
+                            "INSERT INTO OrderBurger_has_MenuItem(idOrderBurger, idMenuItem) 
+                            VALUES(:idOrderBurger, :idMenuItem)"
                          );
                          $insertOrderBurger->bindParam(':idOrderBurger', $orderBurgerIds[$burger]);
                          $insertOrderBurger->bindParam(':idMenuItem', $id);
