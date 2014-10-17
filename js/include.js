@@ -360,6 +360,7 @@ function createQuantityAdjuster(ticketElement, userSetQuantity, burgerPrice){
 function createDeleteButton(ticketElement){
     var deleteButton = document.createElement('button');
     deleteButton.appendChild(document.createTextNode("Delete"));
+    deleteButton.setAttribute("class", "deleteTicketItemButton");
     deleteButton.setAttribute('onClick','removeTicketItem("'+'ticketItem'+ticketItemCounter+'","'+'priceItem'+ticketItemCounter+'","'+'adjuster'+ticketItemCounter+'")');
     ticketElement.appendChild(deleteButton);
 }

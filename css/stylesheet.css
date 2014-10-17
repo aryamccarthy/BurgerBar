@@ -12,7 +12,6 @@ article[id$="ordering"].selected {
   display: inherit;
 }
 
-
 label + label::before, .burger_price::before, #total_price::before {
   content: "$"
 }
@@ -211,6 +210,10 @@ fieldset {
   border-radius: 0.5em;
 }
 
-#total_price {
-list-style-type: none;
+#total_price, .burger_price {
+  list-style-type: none;
+}
+
+.deleteTicketItemButton, .adjuster {
+  float: right; 
 }
