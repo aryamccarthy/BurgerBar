@@ -22,7 +22,7 @@ Futre work:
 	function getDBConnection() { #connects to sql database
 		try {
 			$pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
-				"<username>", "<password>");
+				"root", "3.00x10^8m/s");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
@@ -49,11 +49,11 @@ Futre work:
 		
 		$insertItem = $pdo->prepare(
 			"INSERT INTO MenuItem(name, price, available, MenuComponent_idMenuComponent)
-			VALUES (:name, :price, :isAvailable, :menuComponentID);"
+			VALUES (:name, :price, :available, :menuComponentID);"
 		);
 		$insertItem->bindParam(':name', $name);
 		$insertItem->bindParam(':price', $price);
-		$insertItem->bindValue(':isAvailable', True);
+		$insertItem->bindValue(':available', True);
 		$insertItem->bindParam(':menuComponentID', $compID);
 
 		$lastID = $pdo->prepare("SELECT LAST_INSERT_ID();");
@@ -90,8 +90,56 @@ Futre work:
 		}
 	}
 
+        function buildOrder($pdo, $file_name) {
+            $json = file_get_contents($file_name);
+            $order = json_decode($json, true);
+            $email = $order['email'];
+            $timeStamp = $order['order']['timeStamp'];
+            $burgers = $order['order']['burgers'];
+
+            foreach ($burgers as $burger => $ingredients) {
+                $insertOrder = $pdo->prepare(
+                     "INSERT INTO OrderBurger(idOrderBurger)
+                     VALUES (:idOrderBurger)"
+                );
+                $insertOrder->bindParam(':idOrderBurger', $burger);
+
+                if($insertOrder->execute()) {
+                     echo "success<br>";
+                } else {
+                       echo "fail<br>";
+                       $errorData = $insertOrder->errorInfo();
+                       echo $errorData[2] . "<br>";
+                }
+
+                foreach ($ingredients as $id => $toppingObj) {
+                    foreach ($toppingObj as $item => $id) {
+                         $insertOrderBurger = $pdo->prepare(
+                              "INSERT INTO OrderBurger_has_MenuItem(OrderBurger_idOrderBurger, MenuItem_idMenuItem) 
+                              VALUES (:idOrderBurger, :idMenuItem)"
+                         );
+                         $insertOrderBurger->bindParam(':idOrderBurger', $burger);
+                         $insertOrderBurger->bindParam(':idMenuItem', $id);
+                         
+                         if ($insertOrderBurger->execute()) {
+                              echo "success<br>";
+                         } else {
+                                echo "fail<br>";
+                                $errorData = $insertOrderBurger->errorInfo();
+                                echo $errorData[2] . "<br>";
+                         }
+                    }
+                }
+            } 
+
+            #var_dump($order['order']['burgers'][0][1]);
+        }
+
 	$menu_loc = "./menu.json";
+        $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-	buildItemInfo($pdo, $menu);
+        $order = buildOrder($pdo, $order_loc);
+	#buildItemInfo($pdo, $menu);
+        
 ?>

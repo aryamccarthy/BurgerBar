@@ -95,8 +95,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BurgerBar`.`OrderBurger` ;
 
 CREATE TABLE IF NOT EXISTS `BurgerBar`.`OrderBurger` (
-  `idOrderBurger` INT NOT NULL AUTO_INCREMENT,
-  `idOrder` INT NULL,
+  `idOrderBurger` INT NOT NULL,
+  `idOrder` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idOrderBurger`))
 ENGINE = InnoDB;
 
