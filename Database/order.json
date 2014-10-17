@@ -1,55 +1,34 @@
 {
-    "email" : "rlaugia@smu.edu",
-    "order" : 
-    {
-        "timeStamp" : "2014-02-21 18:32:15",
-        "burgers" : 
-        [
-            { 
-                "burgerID" : 0,
-                "burgerInfo" : 
-                [ 
-                    "bun" : {"itemID" : 5, "name" : "White", "price" : 0.50},
-                    "cheese" : {"itemID" : 8, "name" : "Cheddar", "price" : 0.35},
-                    "meat" : {"itemID" : 0, "name" : "1/3 lb. Beef", "price" : 2},
-                    "side" : {"itemID" : 23, "name" : "French Fries", "price" : 1},
-                    "sauces" : 
-                    [
-                        {"itemID" : 19, "name" : "Ketchup", "price" : 0},
-                        {"itemID" : 20, "name" : "Mustard", "price" : 0}
-                    ],
-                    "toppings" :
-                    [
-                        {"itemID" : 12, "name" : "Lettuce", "price" : 0},
-                        {"itemID" : 11, "name" : "Tomatoes", "price" : 0},
-                        {"itemID" : 13, "name" : "Onions", "price" : 0},
-                        {"itemID" : 14, "name" : "Pickles", "price" : 0}
-                    ]
-                ]
-            },
-
-            { 
-                "burgerID" : 1,
-                "burgerInfo" : 
-                [ 
-                    "bun" : {"itemID" : 6, "name" : "Wheat", "price" : 0.50},
-                    "cheese" : {"itemID" : 9, "name" : "American", "price" : 0.35},
-                    "meat" : {"itemID" : 0, "name" : "1/3 lb. Beef", "price" : 2},
-                    "side" : {"itemID" : 23, "name" : "French Fries", "price" : 1},
-                    "sauces" : 
-                    [
-                        {"itemID" : 22, "name" : "BBQ", "price" : 0},
-                        {"itemID" : 20, "name" : "Mustard", "price" : 0}
-                    ],
-                    "toppings" :
-                    [
-                        {"itemID" : 12, "name" : "Lettuce", "price" : 0},
-                        {"itemID" : 11, "name" : "Tomatoes", "price" : 0},
-                        {"itemID" : 13, "name" : "Onions", "price" : 0},
-                        {"itemID" : 14, "name" : "Pickles", "price" : 0}
-                    ]
-                ]
-            }   
-        ]        
-    }
+     "email" : "rlaugia@smu.edu",
+     "order" : 
+     {
+          "timeStamp" : "2014-02-21 18:32:15",
+          "burgers" : 
+          [
+               [ 
+                    ["idMenuItem" : 5],
+                    ["idMenuItem" : 8],
+                    ["idMenuItem" : 0],
+                    ["idMenuItem" : 23],
+                    ["idMenuItem" : 19],
+                    ["idMenuItem" : 20],
+                    ["idMenuItem" : 12],
+                    ["idMenuItem" : 11],
+                    ["idMenuItem" : 13],
+                    ["idMenuItem" : 14]
+               ],
+               [ 
+                    ["idMenuItem" : 6],
+                    ["idMenuItem" : 9],
+                    ["idMenuItem" : 0],
+                    ["idMenuItem" : 23],
+                    ["idMenuItem" : 22],
+                    ["idMenuItem" : 20],
+                    ["idMenuItem" : 12],
+                    ["idMenuItem" : 11],
+                    ["idMenuItem" : 13],
+                    ["idMenuItem" : 14]
+               ]   
+          ]        
+     }
 }

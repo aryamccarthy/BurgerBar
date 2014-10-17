@@ -176,19 +176,33 @@ function guardPartialOrder() {
 }
 
 var ticketItemCounter = 0;
-var ticketTotal=0.00; 
+ var ticketTotal=0.00; 
+ var quantityCheck = document.getElementsByClassName('adjuster');
+
+
 
 function updateTicket(selectedBurger) {
     var entry = document.createElement('li');
+    var priceEntry=document.createElement('li');
+    var quantity = document.getElementById("burger_quantity").value;
+    var price= document.getElementById(selectedBurger+"_price").innerHTML;
+   
+    priceEntry.innerHTML=price;
+    priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
+   
     entry.appendChild(document.createTextNode(selectedBurger));
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
+   
     createDeleteButton(entry);   
-    createQuantityAdjuster(entry); 
+    createQuantityAdjuster(entry, quantity, price); 
+    updateTicketTotal(quantity, price);
+   
     ticket.appendChild(entry);
+    ticket.appendChild(priceEntry);
     guardPartialOrder();       
 }
 //Tips from: http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
-function removeTicketItem(itemId, priceId, quantityId){
+function removeTicketItem(itemId, priceId, quantityId){ 
     var item = document.getElementById(itemId);
     var priceItem=document.getElementById(priceId);
     var quantityItem=document.getElementById(quantityId);
@@ -286,7 +300,7 @@ function updateTicketForCustomOrder() {
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     
     createDeleteButton(entry);  
-    createQuantityAdjuster(entry,quantity);
+    createQuantityAdjuster(entry,quantity, totalPrice);
     updateTicketTotal(quantity, totalPrice); 
     ticketItemCounter+=1;
 
@@ -299,8 +313,9 @@ function updateTicketForCustomOrder() {
 }
 
 
-function createQuantityAdjuster(ticketElement, userSetQuantity){
+function createQuantityAdjuster(ticketElement, userSetQuantity, burgerPrice){
   var quantityAdjuster = document.createElement('input');
+  quantityAdjuster.setAttribute('class', 'adjuster');
   quantityAdjuster.setAttribute('type','number');
   quantityAdjuster.setAttribute('name','quantity');
   quantityAdjuster.setAttribute('min','1');
@@ -308,7 +323,24 @@ function createQuantityAdjuster(ticketElement, userSetQuantity){
   quantityAdjuster.setAttribute('value', userSetQuantity);
   quantityAdjuster.setAttribute('id', 'adjuster'+ticketItemCounter);
   ticketElement.appendChild(quantityAdjuster);
+
+  var previousQuantity= +quantityAdjuster.value; 
+  
+  quantityAdjuster.addEventListener("input", function(e) {
+    var priceElement = document.getElementById('total_price');
+    if(quantityAdjuster.value > previousQuantity){
+
+      ticketTotal+= +burgerPrice;
+      priceElement.innerHTML=ticketTotal;
+    }
+    else {
+      ticketTotal-= +burgerPrice;
+      priceElement.innerHTML=ticketTotal;
+    }
+    previousQuantity=quantityAdjuster.value; 
+  }, false);
 }
+
 
 function createDeleteButton(ticketElement){
     var deleteButton = document.createElement('button');
@@ -329,8 +361,6 @@ function setIDsToUnchecked(ids) {
   }
 
 }
-
-
 
 function clearCustomOrderForm() {
   var radioIDs = ["#third_beef", "#white"];
