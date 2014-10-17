@@ -177,24 +177,29 @@ function guardPartialOrder() {
   window.onbeforeunload = wasOrdering() ? closeEditorWarning : null;
 }
 
+
 var ticketItemCounter = 0;
 var ticketTotal=0.00; 
 var quantityCheck = document.getElementsByClassName('adjuster');
 
-
-
+//Updates that ticket with past orders and menu burgers that the user adds
 function updateTicket(selectedBurger) {
+    //Create list elements for the burger and its price
     var entry = document.createElement('li');
     var priceEntry=document.createElement('li');
+    
+    //Retreive data from selected burger
     var quantity = document.getElementById("burger_quantity").value;
     var price= document.getElementById(selectedBurger+"_price").innerHTML;
-   
+    
+    //Attach that data to the new elements with unique ids for easy deletion  
     priceEntry.innerHTML=price;
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
-   
     entry.appendChild(document.createTextNode(selectedBurger));
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
    
+    //Create buttons for adjusting quantity within ticket, deletion
+    //Update the ticket total
     createDeleteButton(entry);   
     var cost=document.getElementById('totalPrice');
     createQuantityAdjuster(entry, quantity, price); 
@@ -204,15 +209,14 @@ function updateTicket(selectedBurger) {
     ticket.appendChild(priceEntry);
     guardPartialOrder();       
 }
+
 //Tips from: http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
 function removeTicketItem(itemId, priceId, quantityId){ 
     var item = document.getElementById(itemId);
     var priceItem=document.getElementById(priceId);
     var quantityItem=document.getElementById(quantityId);
     var priceBuffer=priceItem.innerHTML;
-    
     updateTicketTotal(+quantityItem.value, (+priceBuffer * -1));
-
     ticket.removeChild(item);
     ticket.removeChild(priceItem);
     ticket.removeChild(quantityItem);
@@ -220,16 +224,19 @@ function removeTicketItem(itemId, priceId, quantityId){
     guardPartialOrder();
 }
 
+//Updates the ticket total when a user changes the quantity, a burger is added, or deleted
 function updateTicketTotal(userSetQuantity, burgerCost){
   var priceElement = document.getElementById('total_price');
   ticketTotal+= (userSetQuantity * burgerCost);
   priceElement.innerHTML=ticketTotal.toFixed(2);
 }
 
-
+//Adds custom orders to the ticket
 function updateTicketForCustomOrder() {
     var totalPrice=0; 
    
+    //Retieve selected burger options from the form
+    //Increment the totalPrice of the burger as each option is retieved 
     var pattyId = document.querySelector('input[name = "patty"]:checked').id;
     var pattyPrice=document.getElementById(pattyId+"price").innerHTML;
     var pattyText=document.querySelector('input[name = "patty"]:checked').value;
@@ -300,29 +307,29 @@ function updateTicketForCustomOrder() {
     if (sideList==""){
       sideList="none <br>"
     }
+
     totalPrice += +sidesPrice;
+    //Create elements to display the price and burger information
     var entry = document.createElement('li');
     var priceEntry = document.createElement('li');
     
+    //Attach data to elements, create unique ids for easy deletion
     priceEntry.innerHTML=totalPrice.toFixed(2);;
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
     priceEntry.setAttribute("class","burger_price");
-
     var quantity = document.getElementById("burger_quantity").value;
-    
     entry.innerHTML=(pattyText + " patty on a " + bunText + " bun <br> Cheese: "  + cheeseText+ "<br>Toppings: " + toppingsList+ "Sauces: " + sauceList + "Sides: " + sideList); 
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
     
+    //Create delete button, quantity adjuster, update the total on the ticket
     createDeleteButton(entry);  
     createQuantityAdjuster(entry,quantity, totalPrice);
     updateTicketTotal(quantity, totalPrice); 
     ticketItemCounter+=1;
-
     
+    //Attach elements to ticket, clear form for next order 
     ticket.appendChild(entry);
     ticket.appendChild(priceEntry);
-
-    
     guardPartialOrder();
     clearCustomOrderForm();
 }
@@ -340,22 +347,38 @@ function createQuantityAdjuster(ticketElement, userSetQuantity, burgerPrice){
   ticketElement.appendChild(quantityAdjuster);
 
   var previousQuantity= +quantityAdjuster.value; 
-  
+  //Checks for users changing the quantity within the ticket
+  //Updates the ticket total accordingly
   quantityAdjuster.addEventListener("input", function(e) {
     var priceElement = document.getElementById('total_price');
-    if(quantityAdjuster.value > previousQuantity){
-
-      ticketTotal+= +burgerPrice;
-      priceElement.innerHTML=ticketTotal.toFixed(2);;
+    
+    //If the user increments/decrements by 1
+    if((quantityAdjuster.value - previousQuantity)==1){
+      if(quantityAdjuster.value> previousQuantity){
+        ticketTotal+= +burgerPrice;
+        priceElement.innerHTML=ticketTotal.toFixed(2);
+      }
+      else {
+        ticketTotal-= +burgerPrice;
+        priceElement.innerHTML=ticketTotal.toFixed(2);
+      }
     }
+    //Else the user manually inputted a number
     else {
-      ticketTotal-= +burgerPrice;
-      priceElement.innerHTML=ticketTotal.toFixed(2);;
+     if(quantityAdjuster.value> previousQuantity){
+      var quantityDifference = +quantityAdjuster.value - +previousQuantity;
+        ticketTotal+=(+burgerPrice * quantityDifference);
+        priceElement.innerHTML=ticketTotal.toFixed(2);
+      }
+      else {
+        var quantityDifference = +previousQuantity- +quantityAdjuster.value;
+        ticketTotal-= (+burgerPrice * +quantityDifference);
+        priceElement.innerHTML=ticketTotal.toFixed(2);
+      }
     }
     previousQuantity=quantityAdjuster.value; 
   }, false);
 }
-
 
 function createDeleteButton(ticketElement){
     var deleteButton = document.createElement('button');
