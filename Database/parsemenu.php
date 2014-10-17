@@ -99,7 +99,7 @@ Futre work:
             $burgers = $order['order']['burgers'];
             $orderBurgerIds = array();
 
-           /* foreach ($burgers as $burger) {
+            foreach ($burgers as $burger) {
                $insertOrder = $pdo->prepare(
                      "INSERT INTO OrderBurger(idOrderBurger)
                      VALUES (NULL)"
@@ -112,7 +112,7 @@ Futre work:
                        $errorData = $insertOrder->errorInfo();
                        echo $errorData[2] . "<br>";
                 }
-            }*/
+            }
 
             $orderBurgers = $pdo->prepare("SELECT idOrderBurger FROM OrderBurger");
             if ($orderBurgers->execute()) {
