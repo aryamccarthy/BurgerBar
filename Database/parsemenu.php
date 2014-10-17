@@ -20,9 +20,9 @@ Futre work:
 <?php
 
 	function getDBConnection() { #connects to sql database
-		try {
-			$pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
-				"root", "root");
+	    try {
+	         $pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
+			"root", "root");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
