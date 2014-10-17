@@ -12,8 +12,9 @@ article[id$="ordering"].selected {
   display: inherit;
 }
 
-.burger_price::before {
-  content: "$";
+
+label + label::before, .burger_price::before, #total_price::before {
+  content: "$"
 }
 
 fieldset.outer > legend {
@@ -208,4 +209,8 @@ body > header a h1::before {
 
 fieldset {
   border-radius: 0.5em;
+}
+
+#total_price {
+list-style-type: none;
 }
