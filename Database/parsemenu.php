@@ -118,10 +118,11 @@ Futre work:
             }
 
             
-           /* foreach ($burgers as $burger => $ingredients) {    
+            foreach ($burgers as $burger => $ingredients) {
                 foreach ($ingredients as $id => $toppingObj) {
                     foreach ($toppingObj as $item => $id) {
-                         $insertOrderBurger = $pdo->prepare(
+                        echo "$item : $id<br>";
+                       /* $insertOrderBurger = $pdo->prepare(
                               "INSERT INTO OrderBurger_has_MenuItem(OrderBurger_idOrderBurger, MenuItem_idMenuItem) 
                               VALUES (:idOrderBurger, :idMenuItem)"
                          );
@@ -134,10 +135,10 @@ Futre work:
                                 echo "fail<br>";
                                 $errorData = $insertOrderBurger->errorInfo();
                                 echo $errorData[2] . "<br>";
-                         }
+                         }*/
                     }
                 }
-            }*/ 
+            } 
 
             #var_dump($order['order']['burgers'][0][1]);
         }
