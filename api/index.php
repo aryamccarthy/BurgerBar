@@ -172,8 +172,9 @@ $app->get('/getMenu', function() {
         USING (idMenuComponent)
         ORDER BY idMenuComponent;");
     $rows = array();
+    $statement->execute();
     while($temp = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)){
-        $rows[] = $temp;
+        array_push($rows, $temp);
     }
     echo json_encode(array('Menu' => $rows));
 });
