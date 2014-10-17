@@ -86,6 +86,18 @@ $app->post('/createAccount', function() {
 });
 
 /**
+*   Get Menu Burgers
+*
+*   Owner: Luke
+*/
+$app->get('/getMenuBurger', function() {
+    global $pdo;
+    $statement = $pdo->prepare(
+        "SELECT * from "
+    )
+});
+
+/**
 *   Place Order
 *
 *   Owner: Zach
