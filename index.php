@@ -24,202 +24,204 @@ session_start();
                 </ul>
             </nav>
             <article id="custom_ordering" class="selected">
-                    <form name="custom_order" action="" method="">
+                <form name="custom_order" action="" method="">
+                    <fieldset>
+                        <legend>Order a custom burger</legend>
                         <fieldset>
-                            <legend>Order a custom burger</legend>
-                            <fieldset>
-                                <legend>Burger type</legend>
-                                <ol>
-                                    <li>
-                                        <input type="radio" name="patty" id="third_beef" value="1/3 lb. Beef" checked>
-                                        <label for="third_beef">1/3 lb. Beef</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="patty" id="half_beef" value="1/2 lb. Beef">
-                                        <label for="half_beef">1/2 lb. Beef</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="patty" id="two_thirds_beef" value="2/3 lb. Beef">
-                                        <label for="two_thirds_beef">2/3 lb. Beef</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="patty" id="turkey" value="Turkey">
-                                        <label for="turkey">Turkey</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="patty" id="veggie" value="Veggie">
-                                        <label for="veggie">Veggie</label>
-                                    </li>                               
-                                </ol>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Bun</legend>
-                                <ol>
-                                    <li>
-                                        <input type="radio" name="bun" id="white" value="White" checked>
-                                        <label for="white">White</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="bun" id="wheat" value="Wheat">
-                                        <label for="wheat">Wheat</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="bun" id="texas_toast" value="Texas Toast">
-                                        <label for="texas_toast">Texas Toast</label>
-                                    </li>
-                                </ol>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Cheese</legend>
-                                <ol>
-                                    <li>
-                                        <input type="radio" name="cheese" id="cheddar" value="Cheddar" checked>
-                                        <label for="cheddar">Cheddar</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="cheese" id="american" value="American">
-                                        <label for="american">American</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="cheese" id="swiss" value="Swiss">
-                                        <label for="swiss">Swiss</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="cheese" id="no_cheese" value="No Cheese">
-                                        <label for="no_cheese">No Cheese</label>
-                                    </li>
-                                </ol>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Toppings</legend>
-                                <ol>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="tomatoes" value="Tomatoes">
-                                        <label for="tomatoes">Tomatoes</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="lettuce" value="Lettuce">
-                                        <label for="lettuce">Lettuce</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="onions" value="Onions">
-                                        <label for="onions">Onions</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="pickles" value="Pickles">
-                                        <label for="pickles">Pickles</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="bacon" value="Bacon">
-                                        <label for="bacon">Bacon</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="red_onion" value="Red onion">
-                                        <label for="red_onion">Red onion</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="mushrooms" value="Mushrooms">
-                                        <label for="mushrooms">Mushrooms</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="toppings" id="jalapenos" value="Jalapenos">
-                                        <label for="jalapenos">Jalapenos</label>
-                                    </li>
-                                </ol>
-                            </fieldset>
-
-                            <fieldset>
-                                <legend>Sauces</legend>
-                                <ol>
-                                    <li>
-                                        <input type="checkbox" name="sauces" id="ketchup" value="Ketchup">
-                                        <label for="ketchup">Ketchup</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="sauces" id="mustard" value="Mustard">
-                                        <label for="mustard">Mustard</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="sauces" id="mayonnaise" value="Mayonnaise">
-                                        <label for="mayonnaise">Mayonnaise</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="sauces" id="bbq" value="BBQ">
-                                        <label for="bbq">BBQ</label>
-                                    </li>
-                                </ol>
-                            </fieldset>
-                            <fieldset>
-                                <legend>Sides</legend>
-                                <ol>
-                                    <li>
-                                        <input type="checkbox" name="sides" id="french_fries" value="French fries">
-                                        <label for="french_fries">French fries</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="sides" id="tater_tots" value="Tater tots">
-                                        <label for="tater_tots">Tater tots&#0153;</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" name="sides" id="onion_rings" value="Onion rings">
-                                        <label for="onion_rings">Onion rings</label>
-                                    </li>
-                                </ol>
-                            </fieldset>
-                            <fieldset>
-                                <input type='button' onclick='updateTicketForCustomOrder();' value='Add to ticket' />
-                            </fieldset>
+                            <legend>Burger type</legend>
+                            <ol>
+                                <li>
+                                    <input type="radio" name="patty" id="third_beef" value="1/3 lb. Beef" checked>
+                                    <label for="third_beef">1/3 lb. Beef</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="patty" id="half_beef" value="1/2 lb. Beef">
+                                    <label for="half_beef">1/2 lb. Beef</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="patty" id="two_thirds_beef" value="2/3 lb. Beef">
+                                    <label for="two_thirds_beef">2/3 lb. Beef</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="patty" id="turkey" value="Turkey">
+                                    <label for="turkey">Turkey</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="patty" id="veggie" value="Veggie">
+                                    <label for="veggie">Veggie</label>
+                                </li>                               
+                            </ol>
                         </fieldset>
-                    </form>
-                </article>
-            <article id="menu_ordering"
-            <!-- For each burger on the menu -->
-            <!-- Descriptions from http://en.wikipedia.org/wiki/List_of_hamburgers -->
-        <figure>
-            <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-            <figcaption class="burger_label" value="Buffalo Burger">Buffalo Burger</figcaption>  
-            <figcaption class="burger_description">Prepared with meat from the American Bison, buffalo burgers have less cholesterol, less fat, and fewer calories than beef hamburgers and chicken hamburgers. The American Heart Association recommended buffalo burgers in 1997 as more heart-healthy than chicken or beef. </figcaption>  
-            <figcaption class="burger_price">$9.50</figcaption> 
-            <input type='button' id="Buffalo Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
-        </figure>   
-        <figure>
-            <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-            <figcaption class="burger_label" value="Jucy Lucy">Jucy Lucy</figcaption>  
-            <figcaption class="burger_description">A cheeseburger that has the cheese inside the meat patty rather than on top. A piece of cheese is surrounded by raw meat and cooked until it melts, resulting in a molten core of cheese within the patty. </figcaption>  
-            <figcaption class="burger_price">$9.00</figcaption> 
-            <input type='button' id="Jucy Lucy" onclick='updateTicket(this.id)' value='Add to ticket' />
-        </figure>   
-        <figure>
-            <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-            <figcaption class="burger_label">Hamdog</figcaption>  
-            <figcaption class="burger_description">An American dish that consists of a hot dog that is wrapped in a beef patty, deep-fried, covered with chili, a handful of French fries, and a fried egg. </figcaption>  
-            <figcaption class="burger_price">$8.75</figcaption> 
-            <input type='button' id="Hamdog" onclick='updateTicket(this.id)' value='Add to ticket' />
-        </figure>   
-        <figure>
-            <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-            <figcaption class="burger_label">Luther Burger</figcaption>  
-            <figcaption class="burger_description">A hamburger or cheeseburger prepared with one or more glazed doughnuts in place of the bun. </figcaption>  
-            <figcaption class="burger_price">$8.00</figcaption> 
-            <input type='button' id="Luther Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
-        </figure>   
-         <figure>
-            <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-            <figcaption class="burger_label">Teriyaki Burger</figcaption>  
-            <figcaption class="burger_description">Teriyaki burger (テリヤキバーガー?) refers to a variety of hamburger either topped with teriyaki sauce or with the sauce worked into the ground meat patty. </figcaption>  
-            <figcaption class="burger_price">$7.50</figcaption> 
-            <input type='button' id="Teriyaki Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
-        </figure>
-         <figure>
-            <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-            <figcaption class="burger_label">Naan Burger</figcaption>  
-            <figcaption class="burger_description">Made with naan bread, naan burgers, the use of flatbread creates a taste experience different from hamburgers made with bread.
-            </figcaption>  
-            <figcaption class="burger_price">$8.75</figcaption> 
-            <input type='button' id="Naan Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
-        </figure>
+                        <fieldset>
+                            <legend>Bun</legend>
+                            <ol>
+                                <li>
+                                    <input type="radio" name="bun" id="white" value="White" checked>
+                                    <label for="white">White</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="bun" id="wheat" value="Wheat">
+                                    <label for="wheat">Wheat</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="bun" id="texas_toast" value="Texas Toast">
+                                    <label for="texas_toast">Texas Toast</label>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Cheese</legend>
+                            <ol>
+                                <li>
+                                    <input type="radio" name="cheese" id="cheddar" value="Cheddar" checked>
+                                    <label for="cheddar">Cheddar</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="cheese" id="american" value="American">
+                                    <label for="american">American</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="cheese" id="swiss" value="Swiss">
+                                    <label for="swiss">Swiss</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="cheese" id="no_cheese" value="No Cheese">
+                                    <label for="no_cheese">No Cheese</label>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Toppings</legend>
+                            <ol>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="tomatoes" value="Tomatoes">
+                                    <label for="tomatoes">Tomatoes</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="lettuce" value="Lettuce">
+                                    <label for="lettuce">Lettuce</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="onions" value="Onions">
+                                    <label for="onions">Onions</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="pickles" value="Pickles">
+                                    <label for="pickles">Pickles</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="bacon" value="Bacon">
+                                    <label for="bacon">Bacon</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="red_onion" value="Red onion">
+                                    <label for="red_onion">Red onion</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="mushrooms" value="Mushrooms">
+                                    <label for="mushrooms">Mushrooms</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="toppings" id="jalapenos" value="Jalapenos">
+                                    <label for="jalapenos">Jalapenos</label>
+                                </li>
+                            </ol>
+                        </fieldset>
 
-        </article>
+                        <fieldset>
+                            <legend>Sauces</legend>
+                            <ol>
+                                <li>
+                                    <input type="checkbox" name="sauces" id="ketchup" value="Ketchup">
+                                    <label for="ketchup">Ketchup</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="sauces" id="mustard" value="Mustard">
+                                    <label for="mustard">Mustard</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="sauces" id="mayonnaise" value="Mayonnaise">
+                                    <label for="mayonnaise">Mayonnaise</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="sauces" id="bbq" value="BBQ">
+                                    <label for="bbq">BBQ</label>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Sides</legend>
+                            <ol>
+                                <li>
+                                    <input type="checkbox" name="sides" id="french_fries" value="French fries">
+                                    <label for="french_fries">French fries</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="sides" id="tater_tots" value="Tater tots">
+                                    <label for="tater_tots">Tater tots&#0153;</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="sides" id="onion_rings" value="Onion rings">
+                                    <label for="onion_rings">Onion rings</label>
+                                </li>
+                            </ol>
+                        </fieldset>
+                        <fieldset>
+                            <input type='button' onclick='updateTicketForCustomOrder();' value='Add to ticket' />
+                        </fieldset>
+                    </fieldset>
+                </form>
+            </article>
+            <article id="menu_ordering">
+            <!-- For each burger on the menu -->
+            <?php
+                $menuBurgers = json_decod(file_get_contents ('api/index.php/getMenuBurgers'), TRUE);
+            ?>
+            <!-- Descriptions from http://en.wikipedia.org/wiki/List_of_hamburgers -->
+                <figure>
+                    <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+                    <figcaption class="burger_label" value="Buffalo Burger">Buffalo Burger</figcaption>  
+                    <figcaption class="burger_description">Prepared with meat from the American Bison, buffalo burgers have less cholesterol, less fat, and fewer calories than beef hamburgers and chicken hamburgers. The American Heart Association recommended buffalo burgers in 1997 as more heart-healthy than chicken or beef. </figcaption>  
+                    <figcaption class="burger_price">$9.50</figcaption> 
+                    <input type='button' id="Buffalo Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
+                </figure>   
+                <figure>
+                    <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+                    <figcaption class="burger_label" value="Jucy Lucy">Jucy Lucy</figcaption>  
+                    <figcaption class="burger_description">A cheeseburger that has the cheese inside the meat patty rather than on top. A piece of cheese is surrounded by raw meat and cooked until it melts, resulting in a molten core of cheese within the patty. </figcaption>  
+                    <figcaption class="burger_price">$9.00</figcaption> 
+                    <input type='button' id="Jucy Lucy" onclick='updateTicket(this.id)' value='Add to ticket' />
+                </figure>   
+                <figure>
+                    <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+                    <figcaption class="burger_label">Hamdog</figcaption>  
+                    <figcaption class="burger_description">An American dish that consists of a hot dog that is wrapped in a beef patty, deep-fried, covered with chili, a handful of French fries, and a fried egg. </figcaption>  
+                    <figcaption class="burger_price">$8.75</figcaption> 
+                    <input type='button' id="Hamdog" onclick='updateTicket(this.id)' value='Add to ticket' />
+                </figure>   
+                <figure>
+                    <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+                    <figcaption class="burger_label">Luther Burger</figcaption>  
+                    <figcaption class="burger_description">A hamburger or cheeseburger prepared with one or more glazed doughnuts in place of the bun. </figcaption>  
+                    <figcaption class="burger_price">$8.00</figcaption> 
+                    <input type='button' id="Luther Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
+                </figure>   
+                 <figure>
+                    <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+                    <figcaption class="burger_label">Teriyaki Burger</figcaption>  
+                    <figcaption class="burger_description">Teriyaki burger (テリヤキバーガー?) refers to a variety of hamburger either topped with teriyaki sauce or with the sauce worked into the ground meat patty. </figcaption>  
+                    <figcaption class="burger_price">$7.50</figcaption> 
+                    <input type='button' id="Teriyaki Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
+                </figure>
+                 <figure>
+                    <img src="https://openclipart.org/image/200px/svg_to_png/9096/  Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,     Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
+                    <figcaption class="burger_label">Naan Burger</figcaption>  
+                    <figcaption class="burger_description">Made with naan bread, naan burgers, the use of flatbread creates a taste experience different from hamburgers made with bread.
+                    </figcaption>  
+                    <figcaption class="burger_price">$8.75</figcaption> 
+                    <input type='button' id="Naan Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
+                </figure>
+            </article>
     
         <article id="past_ordering">
             <!-- For each past order-->
