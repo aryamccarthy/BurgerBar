@@ -183,11 +183,22 @@ var ticketItemCounter = 0;
 
 function updateTicket(selectedBurger) {
     var entry = document.createElement('li');
+    var priceEntry=document.createElement('li');
+    var quantity = document.getElementById("burger_quantity").value;
+    var price= document.getElementById(selectedBurger+"_price").innerHTML;
+   
+    priceEntry.innerHTML=price;
+    priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
+   
     entry.appendChild(document.createTextNode(selectedBurger));
     entry.setAttribute('id','ticketItem'+ticketItemCounter);
+   
     createDeleteButton(entry);   
-    createQuantityAdjuster(entry); 
+    createQuantityAdjuster(entry, quantity, price); 
+    updateTicketTotal(quantity, price);
+   
     ticket.appendChild(entry);
+    ticket.appendChild(priceEntry);
     guardPartialOrder();       
 }
 //Tips from: http://stackoverflow.com/questions/23504528/dynamically-remove-items-from-list-javascript
@@ -316,7 +327,6 @@ function createQuantityAdjuster(ticketElement, userSetQuantity, burgerPrice){
   var previousQuantity= +quantityAdjuster.value; 
   
   quantityAdjuster.addEventListener("input", function(e) {
-    alert(previousQuantity);
     var priceElement = document.getElementById('total_price');
     if(quantityAdjuster.value > previousQuantity){
 
