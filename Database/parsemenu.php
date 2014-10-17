@@ -21,7 +21,8 @@ Futre work:
 
 	function getDBConnection() { #connects to sql database
 	    try {
-	         $pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
+	    	//127.0.0.1
+	         $pdo = new PDO("mysql:host=127.0.0.1;dbname=BurgerBar", 
 			"root", "root");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
