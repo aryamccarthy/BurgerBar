@@ -73,9 +73,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `BurgerBar`.`Order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BurgerBar`.`Order` ;
+DROP TABLE IF EXISTS `BurgerBar`.`UserOrder` ;
 
-CREATE TABLE IF NOT EXISTS `BurgerBar`.`Order` (
+CREATE TABLE IF NOT EXISTS `BurgerBar`.`UserOrder` (
   `idOrder` INT NOT NULL AUTO_INCREMENT COMMENT '	',
   `timestamp` DATETIME NULL,
   `email` VARCHAR(45) NOT NULL,

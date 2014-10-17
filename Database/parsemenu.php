@@ -22,7 +22,11 @@ Futre work:
 	function getDBConnection() { #connects to sql database
 		try {
 			$pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
+<<<<<<< HEAD
 				"root", "root");
+=======
+				"root", "<password>");
+>>>>>>> 7bb81cc07669e0e9c4d377a7a897973b4f63af97
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
 			$response .= $e->getMessage();
@@ -48,12 +52,17 @@ Futre work:
 		$insertComp->bindValue(':maxQuantity', 1);
 		
 		$insertItem = $pdo->prepare(
+<<<<<<< HEAD
 			"INSERT INTO MenuItem(name, price, available, idMenuComponent)
 			VALUES (:name, :price, :isAvailable, :menuComponentID);"
+=======
+			"INSERT INTO MenuItem(name, price, available, MenuComponent_idMenuComponent)
+			VALUES (:name, :price, :available, :menuComponentID);"
+>>>>>>> 7bb81cc07669e0e9c4d377a7a897973b4f63af97
 		);
 		$insertItem->bindParam(':name', $name);
 		$insertItem->bindParam(':price', $price);
-		$insertItem->bindValue(':isAvailable', True);
+		$insertItem->bindValue(':available', True);
 		$insertItem->bindParam(':menuComponentID', $compID);
 
 		$lastID = $pdo->prepare("SELECT LAST_INSERT_ID();");
@@ -90,8 +99,63 @@ Futre work:
 		}
 	}
 
+        function buildOrder($pdo, $file_name) {
+            $json = file_get_contents($file_name);
+            $order = json_decode($json, true);
+            $email = $order['email'];
+            $timeStamp = $order['order']['timeStamp'];
+            $burgers = $order['order']['burgers'];
+            $burgerIds = array();
+
+            foreach ($burgers as $burger => $ingredients) {
+                array_push($burgerIds, $burger);
+            }
+
+            foreach ($burgerIds as $id) {
+               $insertOrder = $pdo->prepare(
+                     "INSERT INTO OrderBurger(idOrderBurger)
+                     VALUES (NULL)"
+                );
+
+                if($insertOrder->execute()) {
+                     echo "success<br>";
+                } else {
+                       echo "fail<br>";
+                       $errorData = $insertOrder->errorInfo();
+                       echo $errorData[2] . "<br>";
+                }
+            }
+
+            
+           /* foreach ($burgers as $burger => $ingredients) {    
+                foreach ($ingredients as $id => $toppingObj) {
+                    foreach ($toppingObj as $item => $id) {
+                         $insertOrderBurger = $pdo->prepare(
+                              "INSERT INTO OrderBurger_has_MenuItem(OrderBurger_idOrderBurger, MenuItem_idMenuItem) 
+                              VALUES (:idOrderBurger, :idMenuItem)"
+                         );
+                         $insertOrderBurger->bindParam(':idOrderBurger', $burger);
+                         $insertOrderBurger->bindParam(':idMenuItem', $id);
+                         
+                         if ($insertOrderBurger->execute()) {
+                              echo "success<br>";
+                         } else {
+                                echo "fail<br>";
+                                $errorData = $insertOrderBurger->errorInfo();
+                                echo $errorData[2] . "<br>";
+                         }
+                    }
+                }
+            }*/ 
+
+            #var_dump($order['order']['burgers'][0][1]);
+        }
+
 	$menu_loc = "./menu.json";
+        $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-	buildItemInfo($pdo, $menu);
+        #buildItemInfo($pdo, $menu);
+        $order = buildOrder($pdo, $order_loc);	
+        
 ?>
