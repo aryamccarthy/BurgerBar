@@ -21,7 +21,11 @@ Futre work:
 
 	function getDBConnection() { #connects to sql database
 		try {
+<<<<<<< HEAD
 			$pdo = new PDO("mysql:host=127.0.0.1;dbname=BurgerBar", 
+=======
+			$pdo = new PDO("mysql:host=localhost;dbname=BurgerBar", 
+>>>>>>> eaa4aa317d216bed3817d7f361cfd796ba349a37
 				"root", "root");
 		} catch (PDOException $e) {
 			$response = "Failed to connect: ";
@@ -96,13 +100,17 @@ Futre work:
             $email = $order['email'];
             $timeStamp = $order['order']['timeStamp'];
             $burgers = $order['order']['burgers'];
+            $burgerIds = array();
 
             foreach ($burgers as $burger => $ingredients) {
-                $insertOrder = $pdo->prepare(
+                array_push($burgerIds, $burger);
+            }
+
+            foreach ($burgerIds as $id) {
+               $insertOrder = $pdo->prepare(
                      "INSERT INTO OrderBurger(idOrderBurger)
-                     VALUES (:idOrderBurger)"
+                     VALUES (NULL)"
                 );
-                $insertOrder->bindParam(':idOrderBurger', $burger);
 
                 if($insertOrder->execute()) {
                      echo "success<br>";
@@ -111,10 +119,14 @@ Futre work:
                        $errorData = $insertOrder->errorInfo();
                        echo $errorData[2] . "<br>";
                 }
+            }
 
+            
+            foreach ($burgers as $burger => $ingredients) {
                 foreach ($ingredients as $id => $toppingObj) {
                     foreach ($toppingObj as $item => $id) {
-                         $insertOrderBurger = $pdo->prepare(
+                        echo "$item : $id<br>";
+                       /* $insertOrderBurger = $pdo->prepare(
                               "INSERT INTO OrderBurger_has_MenuItem(OrderBurger_idOrderBurger, MenuItem_idMenuItem) 
                               VALUES (:idOrderBurger, :idMenuItem)"
                          );
@@ -127,7 +139,7 @@ Futre work:
                                 echo "fail<br>";
                                 $errorData = $insertOrderBurger->errorInfo();
                                 echo $errorData[2] . "<br>";
-                         }
+                         }*/
                     }
                 }
             } 
@@ -139,7 +151,7 @@ Futre work:
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        $order = buildOrder($pdo, $order_loc);
-	#buildItemInfo($pdo, $menu);
+        #buildItemInfo($pdo, $menu);
+        $order = buildOrder($pdo, $order_loc);	
         
 ?>
