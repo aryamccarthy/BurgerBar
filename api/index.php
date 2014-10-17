@@ -96,10 +96,10 @@ $app->get('/getMenuBurgers', function() {
         "SELECT idMenuBurger AS idBurger, MenuBurger.name AS burgerName, photoFilePath, idMenuItem as idItem, MenuItem.name AS itemName, price
         FROM MenuBurger_has_MenuItem
         NATURAL JOIN (MenuBurger, MenuItem)
-        ORDER BY idBurger;")    ;
+        ORDER BY idBurger;");
     if ($statement->execute()) {
         $idBurger = null;
-        $burgers;
+        $burgers = null;
         while($row = $statement->fetch()) {
             if ($idBurger != $row['idBurger']) {
                 $idBurger = $row['idBurger'];
