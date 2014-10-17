@@ -197,6 +197,7 @@ function updateTicket(selectedBurger) {
     var cost=document.getElementById('totalPrice');
     createQuantityAdjuster(entry, quantity, price); 
     updateTicketTotal(quantity, price);
+    priceEntry.setAttribute("class","burger_price");
     ticket.appendChild(entry);
     ticket.appendChild(priceEntry);
     guardPartialOrder();       
@@ -303,6 +304,7 @@ function updateTicketForCustomOrder() {
     
     priceEntry.innerHTML=totalPrice.toFixed(2);;
     priceEntry.setAttribute('id', 'priceItem'+ticketItemCounter);
+    priceEntry.setAttribute("class","burger_price");
 
     var quantity = document.getElementById("burger_quantity").value;
     
@@ -316,7 +318,7 @@ function updateTicketForCustomOrder() {
 
     
     ticket.appendChild(entry);
-        ticket.appendChild(priceEntry);
+    ticket.appendChild(priceEntry);
 
     
     guardPartialOrder();
