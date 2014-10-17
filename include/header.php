@@ -5,6 +5,7 @@
         <meta charset="UTF-8">      
         <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
         <link rel="stylesheet" type="text/css" href="./css/stylesheet.css">
+        <link rel="shortcut icon" href="./img/main_icon.png">
         <meta name="description" content="Menu Items">
         <meta name="keywords" content="burgers,food,truck,order,menu">
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
