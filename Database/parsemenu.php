@@ -147,7 +147,7 @@ Futre work:
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        #buildItemInfo($pdo, $menu);
+        buildItemInfo($pdo, $menu);
         $order = buildOrder($pdo, $order_loc);	
         
 ?>
