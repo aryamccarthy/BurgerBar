@@ -2,6 +2,7 @@
 <?php
 $pageTitle = "Burger Bar: Order";
 include('include/header.php');
+session_start();
 ?>
 <main>
     <section id="ticket">
@@ -235,35 +236,35 @@ include('include/header.php');
     <button onclick="overlay()">Pay now</button>
 
     <dialog id="paymentDialog">
-        <form id=payment action="order-confirmation.hp">
+        <form id="payment" action="order-confirmation.hp">
             <fieldset>
                 <legend>Your details</legend>
                 <ol>
                     <li>
-                        <label for=first_name>First name</label>
-                        <input id=first_name name=first_name type=text placeholder="First name" required autofocus>
+                        <label for="first_name">First Name</label>
+                        <input id="first_name" name="first_name" type="text" placeholder="First Name" value=<?php echo '"'.$_SESSION['userInfo']['fName'].'"'?>required autofocus>
                     </li>
                     <li>
-                        <label for=last_name>Last name</label>
-                        <input id=last_name name=last_name type=text placeholder="Last name" required>
+                        <label for="last_name">Last name</label>
+                        <input id="last_name" name="last_name" type="text" placeholder="Last name" value=<?php echo '"'.$_SESSION['userInfo']['lName'].'"'?>required>
                     </li>
                     <li>
-                        <label for=email>Email</label>
-                        <input id=email name=email type=email placeholder="example@domain.com" required>
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" placeholder="example@domain.com" value=<?php echo '"'.$_SESSION['userInfo']['email'].'"'?>required>
                     </li>   
                     <li>
                         <label for=provider>Provider</label>
-                    <select name="provider" id="provider">
-                        <option value="visa">Visa</option>
-                        <option value="MasterCard">MasterCard</option>
-                        <option value="american_express" selected>American Express</option>
+                        <select name="provider" id="provider">
+                        <option value="visa" <?php if (strtolower($_SESSION["userInfo"]["cardType"]=="visa")) echo 'selected'?>>Visa</option>
+                        <option value="masterCard" <?php if (strtolower($_SESSION["userInfo"]["cardType"]=="mastercard")) echo 'selected'?>>MasterCard</option>
+                        <option value="americanExpress" <?php if (strtolower($_SESSION["userInfo"]["cardType"]=="americanexpress")) echo 'selected'?>>American Express</option>
                     </select>
                     </li>
 
                     <li>
-                        <label for=credit_card>Credit card</label>
-                        <input id=credit_card name=credit_card type=text placeholder="Credit card number" pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$" required>
-            <!--Regex c/o http://www.regular-expressions.info/creditcard.html-->
+                        <label for="credit_card">Credit card</label>
+                        <input id="credit_card" name="credit_card" type="text" placeholder="Credit card number" value=<?php echo '"'.$_SESSION['userInfo']['cardNum'].'"'?> pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$" required>
+                        <!--Regex c/o http://www.regular-expressions.info/creditcard.html-->
                     </li>
                 </ol>
             </fieldset>
