@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 try {
-    $host = "127.0.0.1";
+    $host = "localhost";
     $pdo = new PDO("mysql:host=$host;dbname=BurgerBar", "root", "root");
 } catch (PDOException $e) {
     $response = "Failed to connect: ";
@@ -90,13 +90,34 @@ $app->post('/createAccount', function() {
 *
 *   Owner: Luke
 */
-$app->get('/getMenuBurger', function() {
+$app->get('/getMenuBurgers', function() {
     global $pdo;
     $statement = $pdo->prepare(
-        "SELECT idMenuBurger AS idBurger, MenuBurger.name AS burgerName, photoFilePath, idMenuItem as idItem, MenuItem.name AS itemName
+        "SELECT idMenuBurger AS idBurger, MenuBurger.name AS burgerName, photoFilePath, idMenuItem as idItem, MenuItem.name AS itemName, price
         FROM MenuBurger_has_MenuItem
-        NATURAL JOIN (MenuBurger, MenuItem);"
-    )
+        NATURAL JOIN (MenuBurger, MenuItem)
+        ORDER BY idBurger;")    ;
+    if ($statement->execute()) {
+        $idBurger = null;
+        $burgers;
+        while($row = $statement->fetch()) {
+            if ($idBurger != $row['idBurger']) {
+                $idBurger = $row['idBurger'];
+                $burgers[$idBurger]['photoFilePath'] = $row["photoFilePath"];
+                $burgers[$idBurger]['name'] = $row["burgerName"];
+                $burgers[$idBurger]['items'] = array();
+            }
+            $item['idItem'] = (int)$row['idItem'];
+            $item['name'] = $row['itemName'];
+            $item['price'] = (int) $row['price'];
+            array_push($burgers[$idBurger]['items'], $item);
+        }
+        $result['menuBurgers']=$burgers;
+    } else {
+        $result['success']=false;
+        $result['error']=$statement->errorInfo();
+    }
+    echo json_encode($result);
 });
 
 /**
@@ -119,8 +140,8 @@ $app->post('/pastOrders', function() {
     $args[":email"] = $_GET['email'];
     $args[":number"] = $_GET['number'];
     
-    $statement = $pdo->prepare("SELECT timestamp, email FROM 
-        Order WHERE email = :email LIMIT :number");
+    $statement = $pdo->prepare("SELECT timestamp, email FROM Order WHERE "
+            . "email = :email LIMIT :number");
    
     
     if ($statement->execute($args)) {
