@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
 try {
-    $host = "localhost";
+    $host = "127.0.0.1";
     $pdo = new PDO("mysql:host=$host;dbname=BurgerBar", "root", "root");
 } catch (PDOException $e) {
     $response = "Failed to connect: ";
@@ -105,8 +105,8 @@ $app->post('/pastOrders', function() {
     $args[":email"] = $_GET['email'];
     $args[":number"] = $_GET['number'];
     
-    $statement = $pdo->prepare("SELECT timestamp, email FROM Order WHERE "
-            . "email = :email LIMIT :number");
+    $statement = $pdo->prepare("SELECT timestamp, email FROM 
+        Order WHERE email = :email LIMIT :number");
    
     
     if ($statement->execute($args)) {
