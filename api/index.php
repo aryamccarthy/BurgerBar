@@ -127,7 +127,20 @@ $app->post('/pastOrders', function() {
 *   Owner: Nicole
 */
 $app->get('/getMenu', function() {
+    global $pdo;
 
+    $statement = $pdo->prepare(
+        "SELECT MenuComponent.name, MenuItem.idMenuComponent,
+            idMenuItem, MenuItem.name, price
+        FROM MenuItem
+        JOIN MenuComponent
+        USING (idMenuComponent)
+        ORDER BY idMenuComponent;");
+    $menu = array();
+    while($temp = $statement->fetch_assoc()){
+        $menu[] = $temp;
+    }
+    echo json_encode($menu);
 });
 
 $app->run();
