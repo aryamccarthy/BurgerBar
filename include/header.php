@@ -31,7 +31,7 @@
             </section>
             <?php
                 session_start();
-                if ($_SESSION['isLoggedIn']==TRUE) {
+                if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn']==TRUE) {
                     include('logged-in.php');
                 } else {
                     include('not-logged-in.php');

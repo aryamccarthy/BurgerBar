@@ -41,20 +41,19 @@ Futre work:
 
 	function buildItemInfo($pdo, $menu) {
 		$insertComp = $pdo->prepare(
-			"INSERT INTO MenuComponent(name, minQuantity, maxQuantity)
-			VALUES(:name, :minQuantity, :maxQuantity);"
+			"INSERT INTO MenuComponent(name, isSingle)
+			VALUES(:name, :isSingle);"
 		);
 		$insertComp->bindParam(':name', $component);
-		$insertComp->bindValue(':minQuantity', 1);
-		$insertComp->bindValue(':maxQuantity', 1);
+		$insertComp->bindValue(':isSingle', 1);
 		
 		$insertItem = $pdo->prepare(
-			"INSERT INTO MenuItem(name, price, available, idMenuComponent)
-			VALUES (:name, :price, :available, :menuComponentID);"
+			"INSERT INTO MenuItem(name, price, isAvailable, idMenuComponent)
+			VALUES (:name, :price, :isAvailable, :menuComponentID);"
 		);
 		$insertItem->bindParam(':name', $name);
 		$insertItem->bindParam(':price', $price);
-		$insertItem->bindValue(':available', True);
+		$insertItem->bindValue(':isAvailable', True);
 		$insertItem->bindParam(':menuComponentID', $compID);
 
 		$lastID = $pdo->prepare("SELECT LAST_INSERT_ID();");
@@ -64,7 +63,7 @@ Futre work:
 			if ($insertComp->execute()) {
 				echo "success </br>";
 			} else {
-				echo "fail </br>";
+				echo $insertComp->errorInfo()[2];
 			}
 
 			if ($lastID->execute()) {
@@ -154,7 +153,7 @@ Futre work:
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        #buildItemInfo($pdo, $menu);
-        $order = buildOrder($pdo, $order_loc);	
+    buildItemInfo($pdo, $menu);
+    // $order = buildOrder($pdo, $order_loc);	
         
 ?>
