@@ -146,15 +146,13 @@ Futre work:
                     }
                 }
             }
-
-            #var_dump($order['order']['burgers'][0][1]);
         }
 
 	$menu_loc = "./menu.json";
         $order_loc = "./order.json";
 	$menu = getMenuItems($menu_loc);
 	$pdo = getDBConnection();
-        #buildItemInfo($pdo, $menu);
+        buildItemInfo($pdo, $menu);
         $order = buildOrder($pdo, $order_loc);	
         
 ?>
