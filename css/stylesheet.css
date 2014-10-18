@@ -200,3 +200,12 @@ fieldset {
 .deleteTicketItemButton, .adjuster {
   float: right; 
 }
+
+#past_ordering p {
+  padding-top: 2em;
+  text-align: center;
+  font-size: 2em;
+}
+
+
+
