@@ -136,23 +136,33 @@ $app->post('/placeOrder', function() {
 */
 $app->post('/pastOrders', function() {
 	global $pdo;
+
+    $arrFindIdUserOrder;
+    $arrFindIdOrderBurger;
+    $arrFindIdMenuComponent;
     
     $args[":email"] = $_GET['email'];
     $args[":number"] = $_GET['number'];
     
-    $statement = $pdo->prepare("SELECT timestamp, email FROM Order WHERE "
+    $statement = $pdo->prepare("SELECT idUserOrder FROM UserOrder WHERE "
             . "email = :email LIMIT :number");
    
     
     if ($statement->execute($args)) {
-        $result["success"] = true;
+        while($row = $statement->fetch()) {
+            $arrFindIdUserOrder[] = $row['idUserOrder'];
+        }
         
-//store values in $result
     } 
     else {
         $result["success"]=false;
         $result["error"]=$statement->errorInfo();
+        echo json_encode($result);
     }
+
+    $statment = Select
+
+
     echo json_encode($result);
 });
 
