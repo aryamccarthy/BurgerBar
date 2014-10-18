@@ -340,10 +340,24 @@ function createQuantityAdjuster(ticketElement, userSetQuantity, burgerPrice){
   quantityAdjuster.setAttribute('id', 'adjuster'+ticketItemCounter);
   ticketElement.appendChild(quantityAdjuster);
 
+  // Help from: http://stackoverflow.com/questions/18156824/restricting-an-input-box-to-only-numbers-0-9
+  quantityAdjuster.onkeydown = function(e) {
+    var key = e.keyCode ? e.keyCode : e.which;
+    if ( isNaN( String.fromCharCode(key) ) ) return false;
+  }
+
   var previousQuantity= +quantityAdjuster.value; 
+  
   //Checks for users changing the quantity within the ticket
   //Updates the ticket total accordingly
   quantityAdjuster.addEventListener("input", function(e) {
+
+    if (quantityAdjuster.value>10){
+      quantityAdjuster.value=10;
+    }
+     if (quantityAdjuster.value<0){
+      quantityAdjuster.value=1;
+    }
     var priceElement = document.getElementById('total_price');
     
     //If the user increments/decrements by 1
