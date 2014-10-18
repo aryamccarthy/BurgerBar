@@ -286,33 +286,74 @@ $app->post('/placeOrder', function() {
 $app->post('/pastOrders', function() {
 	global $pdo;
 
-    $arrFindIdUserOrder;
-    $arrFindIdOrderBurger;
-    $arrFindIdMenuComponent;
+    $isScriptLEgal = true;
+
+    $arrTimeStamp;
+    $arrTimeStampUnique;
+
+    $resultSuccess;
     
     $args[":email"] = $_GET['email'];
-    $args[":number"] = $_GET['number'];
     
-    $statement = $pdo->prepare("SELECT idUserOrder FROM UserOrder WHERE "
-            . "email = :email LIMIT :number");
-   
-    
+    $statement = $pdo->prepare(
+        'SELECT `timestamp`, email, idOrderBurger
+            FROM Order_has_OrderBurger
+            NATURAL JOIN (UserOrder, OrderBurger)
+            WHERE email = :email;'
+        );
+
+    $resultSuccess['email'] = $args[":email"];
+
     if ($statement->execute($args)) {
-        while($row = $statement->fetch()) {
-            $arrFindIdUserOrder[] = $row['idUserOrder'];
+        While($row = $statement->fetch())
+        {
+            $arrTimeStamp[$row['timestamp']][] = $row['idOrderBurger'];
         }
-        
     } 
     else {
+        $isScriptLEgal = false;
         $result["success"]=false;
         $result["error"]=$statement->errorInfo();
         echo json_encode($result);
     }
 
-    $statment = Select
+    foreach ($arrTimeStamp as $k => $v) {
 
+        foreach ($v as $key => $value) {
 
-    echo json_encode($result);
+            $test[":idOrderBurger"] = $value;
+
+            echo $test[":idOrderBurger"];
+
+            $statement = $pdo->prepare(
+                'SELECT idOrderBurger, idMenuItem
+                    FROM OrderBurger_has_MenuItem
+                    NATURAL JOIN (OrderBurger, MenuItem)
+                    WHERE idOrderBurger = :idOrderBurger;'
+                );
+
+            if ($statement->execute($test)) {
+                While($row = $statement->fetch())
+                {
+                    $resultSuccess['orders'][$k][$value][] = $row['idMenuItem'];
+                }
+            } 
+            else {
+                $isScriptLEgal = false;
+                $result["success"]=false;
+                $result["error"]=$statement->errorInfo();
+                echo json_encode($result);
+                break;
+            }
+        }
+    } 
+
+    //var_dump($arrTimeStamp);
+
+    if ($isScriptLEgal) {
+        echo json_encode($resultSuccess);
+    }
+
 });
 
 /**
