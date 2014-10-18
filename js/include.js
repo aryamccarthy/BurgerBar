@@ -108,7 +108,7 @@ $(document).ready(function() {
         "provider": localStorage.provider
       };
       localStorage.users = appendElementToJsonArray(newUser, localStorage.users);
-      window.location = 'index.html';
+      window.location = './index.php';
     }
     else {
       alert("Email is already in use.");
