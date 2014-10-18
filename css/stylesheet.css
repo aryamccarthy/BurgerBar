@@ -207,5 +207,14 @@ fieldset {
   font-size: 2em;
 }
 
+#ticket li {
+  padding-bottom: 1em;
+}
 
+.deleteTicketItemButton {
+  margin-left: 1em; 
+}
 
+.burger_price {
+  text-align: center;
+}

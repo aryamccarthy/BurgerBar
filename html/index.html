@@ -286,21 +286,13 @@
 			<article id="past_ordering">
 				<!-- For each past order-->
 				<p>You have no past orders. Let's fix that.</p> 
-				<figure>
-					<img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food, 	Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />
-					<figcaption class="burger_label">Naan Burger</figcaption>  
-					<figcaption class="burger_description">Made with naan bread, naan burgers, the use of flatbread creates a taste experience different from hamburgers made with bread.
-					</figcaption>  
-					<figcaption class="burger_price" id="Naan Burger_price">8.75</figcaption> 
-					<input type='button' id="Naan Burger" onclick='updateTicket(this.id)' value='Add to ticket' />
-				</figure>
 			</article>
 		</section>
 		<h3>Total price</h3>
 		<ul>
 			<li id="total_price">0.00</li>
 		</ul>
-		<button onclick="overlay()">Pay now</button>
+		<button id="pay_now"onclick="overlay()">Pay now</button>
 
 	</main>
 	<dialog id="paymentDialog">
