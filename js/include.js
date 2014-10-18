@@ -1,5 +1,7 @@
 $(document).ready(function() {
   if (localStorage.emails === undefined) {
+    // This is a cheap hack to test whether someone is logged in.
+    // We use localStorage to create a mock set of accounts.
     localStorage.emails = JSON.stringify(["admccarthy@gmail.com", "rsward@gmail.com"]);
     var rebecca = {"first_name":"Rebecca", "last_name": "Ward", "email": "rsward@gmail.com", "password": "passward", "credit_card": "3734123412341234", "provider": "MasterCard"};
     var arya = {"first_name":"Arya", "last_name": "McCarthy", "email": "admccarthy@gmail.com", "password": "facebook", "credit_card": "5432432143214321", "provider": "visa"};
@@ -25,6 +27,7 @@ $(document).ready(function() {
     localStorage.pastOrders = JSON.stringify(pastOrders);
   }
 
+  // If logged in and you have past orders, show them.
   if ($("#past_ordering").length !== 0) {
     if (loggedIn()) {
       var all_orders = JSON.parse(localStorage.pastOrders);
@@ -40,6 +43,7 @@ $(document).ready(function() {
     }
   }
   var ticket = document.getElementById('active_ticket');
+  // These three actions allow only one of the three ordering panes to show.
   $("#custom_order_link").click(function(event){
     event.preventDefault();
     $("#custom_ordering").addClass("selected");
@@ -59,10 +63,12 @@ $(document).ready(function() {
     $("#past_ordering").addClass("selected");
   });
 
+  // Faked login form.
   $(document).on('submit', '#login_form', function (event) {
     event.preventDefault();
     var email = $("#login_email").val();
     if (userExists(email)) {
+      // Pulls user data, storing locally.
       var users = JSON.parse(localStorage.users);
       for (var i = 0; i < users.length; ++i) {
         if (users[i].email === email && users[i].password === $("#login_password").val()) {
@@ -82,6 +88,7 @@ $(document).ready(function() {
     }
   });
 
+  // Logs user in. Checks everything.
   $(document).on('submit', '#login', function (event) {
     event.preventDefault();
     if (!userExists($("#email").val())) {
@@ -108,25 +115,29 @@ $(document).ready(function() {
     }
   });
   showUser();
+  // Guards against partial orders.
   $(document).on('submit', '#payment', function(event) {
     window.onbeforeunload = null;
   });
   
+  // For the two things that are selectable 0-1.
   $('input:checkbox[name="sides"]').click(limitSelectionToOne);
   $("input:checkbox[name='cheese']").click(limitSelectionToOne);
 });
 
-function appendElementToJsonArray(str, json) {
+function appendElementToJsonArray(elem, json) {
   var arr = JSON.parse(json);
-  arr.push(str);
+  arr.push(elem);
   var new_json = JSON.stringify(arr);
   return new_json;
 }
 
+// Checks localStorage. Update if API is ready.
 function userExists(email) {
   return (localStorage.emails !== undefined) && (JSON.parse(localStorage.emails).indexOf(email) !== -1);
 }
 
+// Restricts selectable elements from a checkbox group.
 function limitSelectionToOne() {
     if ($(this).is(":checked")) {
         var group = "input:checkbox[name='" + $(this).attr("name") + "']";
@@ -137,6 +148,7 @@ function limitSelectionToOne() {
     }
 }
 
+// Swaps message if user is logged in.
 function showUser() {
   if (loggedIn()) {
     var first_name = getUserFirstName();
@@ -147,34 +159,31 @@ function showUser() {
   }
 }
 
+// Getters
 function getUserFirstName() {
   return localStorage.getItem("first_name");
 }
-
 function getUserLastName() {
   return localStorage.getItem("last_name");
 }
-
 function getUserEmail() {
   return localStorage.getItem("email");
 }
-
-
 function getUserProvider() {
   return localStorage.getItem("provider");
 }
-
-
 function getUserCreditCard() {
   return localStorage.getItem("credit_card");
 }
 
+// Sets up payment dialog and fills data if logged in.
 function overlay() {
   var el = document.getElementById("paymentDialog");
   el.style.visibility = (el.style.visibility === "visible") ? "hidden" : "visible";
   prepopulate();
 }
 
+// Fills diaog data.
 function prepopulate() {
   if (loggedIn()) {
     $("#first_name").val(getUserFirstName());
@@ -185,6 +194,7 @@ function prepopulate() {
   }
 }
 
+// Checks using cheap hack. Update when API is ready.
 function loggedIn() {
   return localStorage.getItem("first_name") !== null;
 }
@@ -200,6 +210,7 @@ function closeEditorWarning() {
 function wasOrdering() {
   return $("[id^='ticketItem']").length !== 0;
 }
+// If was ordering, warn that trying to close editor.
 function guardPartialOrder() {
   window.onbeforeunload = wasOrdering() ? closeEditorWarning : null;
 }
@@ -429,12 +440,14 @@ function createDeleteButton(ticketElement){
     ticketElement.appendChild(deleteButton);
 }
 
+// Checks all items in range.
 function setIDsToChecked(ids) {
   for (var i = 0; i < ids.length; ++i) {
     $(ids[i]).prop('checked', true);
   }
 }
 
+// Unchecks all elements in range.
 function setIDsToUnchecked(ids) {
   for (var i = 0; i < ids.length; ++i) {
     $(ids[i]).prop('checked', false);
@@ -442,6 +455,7 @@ function setIDsToUnchecked(ids) {
 
 }
 
+// Ready to clear form to defaults when item added to ticket or asked to clear.
 function clearCustomOrderForm() {
   var radioIDs = ["#third_beef", "#white"];
   setIDsToChecked(radioIDs);
