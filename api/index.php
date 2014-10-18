@@ -96,10 +96,10 @@ $app->get('/getMenuBurgers', function() {
         "SELECT idMenuBurger AS idBurger, MenuBurger.name AS burgerName, photoFilePath, idMenuItem as idItem, MenuItem.name AS itemName, price
         FROM MenuBurger_has_MenuItem
         NATURAL JOIN (MenuBurger, MenuItem)
-        ORDER BY idBurger;")    ;
+        ORDER BY idBurger;");
     if ($statement->execute()) {
         $idBurger = null;
-        $burgers;
+        $burgers = null;
         while($row = $statement->fetch()) {
             if ($idBurger != $row['idBurger']) {
                 $idBurger = $row['idBurger'];
@@ -126,7 +126,156 @@ $app->get('/getMenuBurgers', function() {
 *   Owner: Zach
 */
 $app->post('/placeOrder', function() {
+    global $pdo;
+    $json = $_POST['order'];
+    $order = json_decode($json, true);
+    $userEmail = $order['email'];
+    $timeStamp = $order['order']['timeStamp'];
+    $burgers = $order['order']['burgers'];
+    $orderBurgerIds = array();
+    $errorInfo = array();
+    $success = False;
+    $orderId = 0;
 
+   /* $lName = 'Laugia';
+    $fName = 'Robert';
+    $cardNum = '12345678';
+    $cardType = 'Visa';
+    $phoneNum = '1234';
+    $password = 'pass';            
+ 
+    $insertUser = $pdo->prepare(
+        "INSERT INTO User(email, lName, fName, cardNum, 
+        cardType, PhoneNum, password)
+        VALUES(:email, :lName, :fName, :cardNum, :cardType, :phoneNum, :password)"
+    );
+    $insertUser->bindParam(':email', $userEmail);
+    $insertUser->bindParam(':lName', $lName);
+    $insertUser->bindParam(':fName', $fName);
+    $insertUser->bindParam(':cardNum', $cardNum);
+    $insertUser->bindParam(':cardType', $cardType);
+    $insertUser->bindParam(':phoneNum', $phoneNum);
+    $insertUser->bindParam(':password', $password);
+
+    if ($insertUser->execute()) {
+        echo "Successfully inserted int User<br>";
+    } else {
+          echo "fail<br>";
+          $errorData = $insertUser->errorInfo();
+          echo $errorData[2] . "<br>";
+    }*/
+
+    $insertOrder = $pdo->prepare( #prepare to insert info into UserOrder table
+        "INSERT INTO UserOrder(timestamp, email)
+        VALUES(:timestamp, :email)"
+    );
+    $insertOrder->bindParam(':timestamp', $timeStamp);
+    $insertOrder->bindParam(':email', $userEmail);
+
+    if ($insertOrder->execute()) {
+        $success = True;
+    } else {
+          $result = "failed to add desired order into database: ";
+          $errorData = $insertOrder->errorInfo();
+          $result .= $errorData[2];
+          array_push($errorInfo, $result);
+    } 
+
+    foreach ($burgers as $burger) { #assign an ID to each burger in the order
+        $insertOrderBurger = $pdo->prepare(
+            "INSERT INTO OrderBurger(idOrderBurger)
+            VALUES (NULL)"
+        );
+
+        if ($insertOrderBurger->execute()) {
+           $success = True;
+        } else {
+              $result =  "failed to add burger into database: ";
+              $errorData = $insertOrderBurger->errorInfo();
+              $result .= $errorData[2];
+              array_push($errorInfo, $result);
+        }
+    }
+
+    $orderBurgers = $pdo->prepare("SELECT idOrderBurger FROM OrderBurger");
+    if ($orderBurgers->execute()) { #access burger ids
+        $success = True;
+        while($row = $orderBurgers->fetch()) {
+            array_push($orderBurgerIds, $row['idOrderBurger']); #store ids in array
+        }
+    } else {
+          $result "failed to access burger ID for this order: ";
+          $errorData = $orderBurgers->errorInfo();
+	  $result .= $errorData[2];
+          array_push($errorInfo, $result);
+    }
+
+    $getOrderId = $pdo->prepare( #get the ID of the current order
+        "SELECT idUserOrder FROM UserOrder
+        WHERE email = :email AND timestamp = :timestamp
+    ");
+    $getOrderId->bindParam(':email', $userEmail); 
+    $getOrderId->bindParam(':timestamp', $timeStamp);
+
+    if ($getOrderId->execute()) {
+        $success = True;
+        while($row = $getOrderId->fetch()) {
+            $orderId = $row['idUserOrder'];
+        }
+    } else {
+          $result = "failed to access order ID for this order: ";
+          $errorData = $orderBurgers->errorInfo();
+          $result .= $errorData[2];
+          array_push($errorInfo, $result);
+    }
+    
+    foreach ($burgers as $burger => $ingredients) {
+        $insertHasOrderBurger = $pdo->prepare( #insert each burger in the order
+            "INSERT INTO Order_has_OrderBurger(idUserOrder, idOrderBurger)
+            VALUES(:idUserOrder, :idOrderBurger)"
+        );
+        $insertHasOrderBurger->bindParam(':idUserOrder', $orderId);
+        $insertHasOrderBurger->bindParam('idOrderBurger', $orderBurgerIds[$burger]);                        
+
+        if ($insertHasOrderBurger->execute()) {
+            $success = True;
+        } else {
+              $result = "failed to added burgerID-orderID association: ";
+              $errorData = $insertHasOrderBurger->errorInfo();
+              $result .= $errorData[2];
+              array_push($errorInfo, $result);
+        }
+ 
+        foreach ($ingredients as $id => $toppingObj) {
+            foreach ($toppingObj as $item => $id) {
+                $insertOrderBurger = $pdo->prepare( #insert each topping and the burger ID
+                    "INSERT INTO OrderBurger_has_MenuItem(idOrderBurger, idMenuItem) 
+                    VALUES(:idOrderBurger, :idMenuItem)"
+                );
+                $insertOrderBurger->bindParam(':idOrderBurger', $orderBurgerIds[$burger]);
+                $insertOrderBurger->bindParam(':idMenuItem', $id);
+                         
+                if ($insertOrderBurger->execute()) {
+                    $success = True;
+                } else {
+                      $result = "failed to add burger-topping association: ";
+                      $errorData = $insertOrderBurger->errorInfo();
+                      $result .= $errorData[2];
+                      array_push($errorInfo, $result);
+                }
+            }
+        }
+    }
+
+    if ($success) {
+        $results['pass'] = True;
+        $results['user'] = $userEmail;
+    } else {
+          $results['pass'] = False;
+          $results['errorInfo'] = $errorInfo;
+    }
+  
+    return $results;
 });
 
 /**
@@ -175,18 +324,30 @@ $app->get('/getMenu', function() {
     global $pdo;
 
     $statement = $pdo->prepare(
-        "SELECT MenuComponent.name, MenuItem.idMenuComponent,
-            idMenuItem, MenuItem.name, price
+        "SELECT MenuComponent.name AS compName, MenuItem.idMenuComponent AS compID, 
+            idMenuItem AS itemID, MenuItem.name AS itemName, price
         FROM MenuItem
-        JOIN MenuComponent
-        USING (idMenuComponent)
+        JOIN MenuComponent USING (idMenuComponent)
         ORDER BY idMenuComponent;");
-    $rows = array();
-    $statement->execute();
-    while($temp = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)){
-        array_push($rows, $temp);
+    if ($statement->execute()) {
+        $compGroup = NULL;
+        $group;
+        while($row = $statement->fetch($fetch_style=$pdo::FETCH_ASSOC)){
+            if($compGroup != $row['compName']){
+                $compGroup = $row['compName'];
+                $group[$compGroup] = array();
+            }
+            $item['name'] = $row['itemName'];
+            $item['price'] = $row['price'];
+            array_push($group[$compGroup],$item);
+        }
+
+        $result['menu']=$group;
+    } else {
+        $result['success']=false;
+        $result['error']=$statement->errorInfo();
     }
-    echo json_encode(array('Menu' => $rows));
+    echo json_encode($result);
 });
 
 $app->run();

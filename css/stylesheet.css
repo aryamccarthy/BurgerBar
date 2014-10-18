@@ -29,9 +29,6 @@ body {
   max-width: 1000px;
   min-width: 640px;
   margin: 0 auto;
-  display: grid;
-  grid-columns: 75% 0 25%;
-  grid-rows: auto 1em auto;
 }
 
 fieldset ol {
@@ -71,10 +68,6 @@ body > header #title {
   padding-right: 0.5em;
 }
 
-body > header {
-  grid-column-span: 3;
-  grid-row: 1;
-}
 
 #title, #login_section, #user_section, body > nav, 
 body > nav > ul, body > nav > ul > li {
@@ -98,16 +91,6 @@ body > nav ul a {
   font-size: 24px;
   padding: 0 0.5em;
   margin-top: 0.16em;
-}
-
-#ordering {
-  grid-column: 1;
-  grid-row: 3;
-}
-
-#ticket {
-  grid-column: 3;
-  grid-row: 3;
 }
 
 #login_section, #user_section {
@@ -216,4 +199,22 @@ fieldset {
 
 .deleteTicketItemButton, .adjuster {
   float: right; 
+}
+
+#past_ordering p {
+  padding-top: 2em;
+  text-align: center;
+  font-size: 2em;
+}
+
+#ticket li {
+  padding-bottom: 1em;
+}
+
+.deleteTicketItemButton {
+  margin-left: 1em; 
+}
+
+.burger_price {
+  text-align: center;
 }
