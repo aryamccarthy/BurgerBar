@@ -33,7 +33,7 @@ Insert Into UserOrder Values
 Insert Into OrderBurger Values
 (null),
 (null),
-(null)
+(null);
 
 Insert Into UserOrder_has_OrderBurger Values 
 (0001, 0001),
@@ -44,8 +44,21 @@ Daniel Rizzuto
 203-247-2705
 dgrsoccer@gmail.com
 
-
 SELECT MenuComponent.idMenuComponent, MenuComponent.name, idMenuItem, MenuItem.name, price
 FROM MenuItem
 JOIN MenuComponent
 ON (MenuItem.idMenuComponent= MenuComponent.idMenuComponent);
+
+SELECT `timestamp`, email, idOrderBurger
+FROM UserOrder_has_OrderBurger
+NATURAL JOIN (UserOrder, OrderBurger)
+WHERE email = 'drizzuto@smu.edu';
+
+SELECT idOrderBurger, idMenuItem
+FROM OrderBurger_has_MenuItem
+NATURAL JOIN (OrderBurger, MenuItem)
+WHERE idOrderBurger = 1;
+
+
+
+

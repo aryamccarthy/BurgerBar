@@ -39,16 +39,6 @@ CREATE TABLE BurgerBar.MenuItem (
 );
 
 ##
-# Menu Component has Menu Item
-CREATE TABLE BurgerBar.MenuComponent_has_MenuItem (
-	idMenuComponent INT NOT NULL,
-	idMenuItem INT NOT NULL,
-	PRIMARY KEY(idMenuComponent, idMenuItem),
-	FOREIGN KEY(idMenuComponent) REFERENCES BurgerBar.MenuComponent(idMenuComponent),
-	FOREIGN KEY(idMenuItem) REFERENCES BurgerBar.MenuItem(idMenuItem)
-);
-
-##
 # User Order
 CREATE TABLE BurgerBar.UserOrder (
 	idUserOrder INT NOT NULL AUTO_INCREMENT,
@@ -63,6 +53,16 @@ CREATE TABLE BurgerBar.UserOrder (
 CREATE TABLE BurgerBar.OrderBurger (
 	idOrderBurger INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(idOrderBurger)
+);
+
+##
+# Order Burger has Menu Item
+CREATE TABLE BurgerBar.OrderBurger_has_MenuItem (
+	idOrderBurger INT NOT NULL,
+	idMenuItem INT NOT NULL,
+	PRIMARY KEY(idOrderBurger, idMenuItem),
+	FOREIGN KEY(idOrderBurger) REFERENCES BurgerBar.OrderBurger(idOrderBurger),
+	FOREIGN KEY(idMenuItem) REFERENCES BurgerBar.MenuItem(idMenuItem)
 );
 
 ##
