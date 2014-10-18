@@ -4,8 +4,41 @@ $(document).ready(function() {
     var rebecca = {"first_name":"Rebecca", "last_name": "Ward", "email": "rsward@gmail.com", "password": "passward", "credit_card": "3734123412341234", "provider": "MasterCard"};
     var arya = {"first_name":"Arya", "last_name": "McCarthy", "email": "admccarthy@gmail.com", "password": "facebook", "credit_card": "5432432143214321", "provider": "visa"};
     localStorage.users = JSON.stringify([rebecca, arya]);
+    var an_order = '<figure> \
+          <img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,   Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" /> \
+          <figcaption class="burger_label">Naan Burger</figcaption>   \
+          <figcaption class="burger_description">Made with naan bread, naan burgers, the use of flatbread creates a taste experience different from hamburgers made with bread. \
+          </figcaption>   \
+          <figcaption class="burger_price" id="Naan Burger_price">8.75</figcaption> \
+          <input type="button" id="Naan Burger" onclick="updateTicket(this.id)" value="Add to ticket" /> \
+        </figure> \
+        <figure> \
+          <img src="https://openclipart.org/image/200px/svg_to_png/9096/Gerald_G_Fast_Food_Lunch_Dinner_(FF_Menu)_22.png" title="Fast Food,   Lunch-Dinner, Hamburger by  Gerald_G (/user-detail/Gerald_G)" />\
+          <figcaption class="burger_label">Luther Burger</figcaption>  \
+          <figcaption class="burger_description">A hamburger or cheeseburger prepared with one or more glazed doughnuts in place of the bun. </figcaption>\
+          <figcaption class="burger_price" id="Luther Burger_price">8.00</figcaption> \
+          <input type="button" id="Luther Burger" onclick="updateTicket(this.id)" value="Add to ticket" />\
+        </figure> \
+';
+    var arya_order = {"email": "admccarthy@gmail.com", "order": [an_order]};
+    var pastOrders = [arya_order];
+    localStorage.pastOrders = JSON.stringify(pastOrders);
   }
 
+  if ($("#past_ordering").length !== 0) {
+    if (loggedIn()) {
+      var all_orders = JSON.parse(localStorage.pastOrders);
+      for (var c = 0; c < all_orders.length; ++c) {
+        if (all_orders[c].email === getUserEmail()) {
+          var result = "";
+          for (var d = 0; d < all_orders[c].order.length; ++d) {
+            result += all_orders[c].order[d];
+          }
+          $("#past_ordering").html(result);
+        }
+      }
+    }
+  }
   var ticket = document.getElementById('active_ticket');
   $("#custom_order_link").click(function(event){
     event.preventDefault();
