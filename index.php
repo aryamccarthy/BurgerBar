@@ -44,6 +44,7 @@ function getDBconnection() {
                                 MenuComponent.name AS componentName,
                                 idMenuItem AS idItem,
                                 MenuItem.name As itemName,
+                                isSingle,
                                 price
                             FROM MenuItem
                             JOIN MenuComponent
@@ -58,6 +59,7 @@ function getDBconnection() {
                                     $components[$idComponent]['name'] = $row['componentName'];
                                     //TODO: get 0-n, 0-1, etc.
                                     $components[$idComponent]['items'] = array();
+                                    $components[$idComponent]['isSingle'] = $row['isSingle'];
                                 }
                                 $item['idItem'] = (int)$row['idItem'];
                                 $item['name'] = $row['itemName'];
@@ -75,7 +77,11 @@ function getDBconnection() {
                             echo '<ol>';
                             foreach ($component['items'] as $item) {
                                 echo '<li>';
-                                echo '<input type="radio" name="'.$component['name'].'" id="item-'.$item['idItem'].'" value="'.$item['name'].'">';
+                                if ($component['isSingle'] == true) {
+                                    echo '<input type="radio" name="'.$component['name'].'" id="item-'.$item['idItem'].'" value="'.$item['name'].'">';
+                                } else {
+                                    echo '<input type="checkbox" name="'.$component['name'].'" id="item-'.$item['idItem'].'" value="'.$item['name'].'">';
+                                } 
                                 echo '<label for="'.$item['name'].'">'.$item['name'].'</label>';
                                 echo '</li>';
                             }

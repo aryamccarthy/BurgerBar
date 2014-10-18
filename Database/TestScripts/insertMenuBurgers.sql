@@ -59,6 +59,10 @@ FROM OrderBurger_has_MenuItem
 NATURAL JOIN (OrderBurger, MenuItem)
 WHERE idOrderBurger = 1;
 
+UPDATE MenuComponent
+SET isSingle=0
+WHERE idMenuComponent=4 OR idMenuComponent=5;
+
 
 
 

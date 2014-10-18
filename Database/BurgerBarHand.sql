@@ -94,9 +94,6 @@ CREATE TABLE BurgerBar.UserOrder_has_OrderBurger (
 	FOREIGN KEY(idOrderBurger) REFERENCES BurgerBar.OrderBurger(idOrderBurger)
 );
 
-##
-# 
-
 
 
 
